@@ -2,6 +2,7 @@ package com.coco.dragon.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,10 +12,10 @@ import java.util.Date;
  */
 @Data
 public class BaseReq {
-    @NotBlank(message = "当前分页不能为空")
+    @NotNull(message = "当前分页不能为空")
     private Integer pageNum;
 
-    @NotBlank(message = "分页数量不能为空")
+    @NotNull(message = "分页数量不能为空")
     private Integer pageSize;
 
     private Integer id;

@@ -19,8 +19,26 @@
         <dependency>
             <groupId>com.coco</groupId>
             <artifactId>common</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>/dist/${artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 
+            <!-- 配置当前项目的jdk版本信息 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

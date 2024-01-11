@@ -20,25 +20,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
-        <spring-boot.version>3.0.0</spring-boot.version>
-        <spring-cloud.version>2022.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
-        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
-        <fastjson.version>1.2.70</fastjson.version>
-        <minio.version>8.4.3</minio.version>
-        <mybatis.version>3.0.0</mybatis.version>
-        <mysql.version>8.0.29</mysql.version>
-        <lombok.version>1.18.22</lombok.version>
-        <hutool.version>5.8.10</hutool.version>
     </properties>
     <modules>
-        <!--        系统-->
-        <!--        系统-->
-        <!--        网关-->
-        <!--        业务-->
-        <!--        定时任务-->
-        <!--        文件服务-->
+<!--        业务接口-->
         <module>dragon-api</module>
+<!--        代码生成器-->
         <module>generator</module>
     </modules>
 
@@ -46,77 +32,10 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-            <!-- SpringCloud 微服务 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- SpringCloud Alibaba 微服务 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-
-            <!-- lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-
-            <!--hutool-->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
-            <!-- mybatis -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.coco</groupId>
                 <artifactId>common</artifactId>
                 <version>1.0.0</version>
-            </dependency>
-
-            <!-- mysql -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>
-
-            <!-- pagehelper -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
-            </dependency>
-
-            <!-- minio -->
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
             </dependency>
 
         </dependencies>
