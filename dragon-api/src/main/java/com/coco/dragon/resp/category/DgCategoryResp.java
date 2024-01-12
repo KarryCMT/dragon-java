@@ -1,5 +1,8 @@
 package com.coco.dragon.resp.category;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,6 +12,8 @@ import java.util.Date;
  */
 @Data
 public class DgCategoryResp {
+
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
     private String name;
@@ -17,12 +22,16 @@ public class DgCategoryResp {
 
     private String remark;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
     private Date createTime;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long updatorId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
     private Date updateTime;
 
     private Integer status;

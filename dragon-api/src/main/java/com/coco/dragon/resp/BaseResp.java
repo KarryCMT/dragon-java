@@ -1,15 +1,21 @@
 package com.coco.dragon.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author liaoshen
+ */
 @Data
 public class BaseResp {
     /**
      * 创建人
      */
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
 
     /**
@@ -21,6 +27,7 @@ public class BaseResp {
     /**
      * 更新人
      */
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long updatorId;
 
     /**

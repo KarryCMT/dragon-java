@@ -1,4 +1,4 @@
-package com.coco.dragon.resp.post;
+package com.coco.dragon.resp.collect;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -11,22 +11,16 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgPostResp {
+public class DgCollectResp {
 
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
     @JsonSerialize(using= ToStringSerializer.class)
-    private Long userId;
+    private Long postId;
 
     @JsonSerialize(using= ToStringSerializer.class)
-    private Long categoryId;
-
-    private String title;
-
-    private String pictures;
-
-    private String remark;
+    private Long userId;
 
     @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
@@ -44,5 +38,4 @@ public class DgPostResp {
 
     private Integer status;
 
-    private String content;
 }
