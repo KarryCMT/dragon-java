@@ -10,7 +10,7 @@ import com.coco.dragon.mapper.DgUserMapper;
 import com.coco.dragon.req.user.DgUserGetReq;
 import com.coco.dragon.req.user.DgUserQueryReq;
 import com.coco.dragon.req.user.DgUserSaveReq;
-import com.coco.dragon.resp.DgUserResp;
+import com.coco.dragon.resp.user.DgUserResp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -34,7 +34,7 @@ public class DgUserService {
     /**
      * 获取用户分页
      *
-     * @param
+     * @param req
      * @return
      */
     public PageInfo page(DgUserQueryReq req) {

@@ -1,4 +1,4 @@
-package com.coco.dragon.resp;
+package com.coco.dragon.resp.category;
 
 import lombok.Data;
 
@@ -8,18 +8,14 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgUserResp {
-    private Integer id;
+public class DgCategoryResp {
+    private Long id;
 
-    private String phone;
+    private String name;
 
-    private String nickName;
+    private String cover;
 
-    private String avatarUrl;
-
-    private String email;
-
-    private String password;
+    private String remark;
 
     private Long creatorId;
 
