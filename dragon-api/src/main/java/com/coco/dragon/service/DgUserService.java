@@ -89,6 +89,23 @@ public class DgUserService {
         return dgUserMapper.insert(user);
     }
 
+
+    /**
+     * 修改
+     *
+     * @param req
+     * @return
+     */
+    public int update(DgUserSaveReq req) {
+        DateTime now = DateTime.now();
+        DgUserExample dgUserExample = new DgUserExample();
+        DgUserExample.Criteria criteria = dgUserExample.createCriteria();
+        criteria.andIdEqualTo(req.getId());
+        DgUser user = BeanUtil.copyProperties(req, DgUser.class);
+        user.setUpdateTime(now);
+        user.setUpdatorId(1L);
+        return dgUserMapper.updateByExampleSelective(user,dgUserExample);
+    }
     /**
      * 删除
      *
@@ -101,6 +118,6 @@ public class DgUserService {
         criteria.andIdEqualTo(req.getId());
         DgUser user = dgUserMapper.selectByPrimaryKey(req.getId());
         user.setFlag(0);
-        return dgUserMapper.updateByExample(user, dgUserExample);
+        return dgUserMapper.updateByExampleSelective(user, dgUserExample);
     }
 }

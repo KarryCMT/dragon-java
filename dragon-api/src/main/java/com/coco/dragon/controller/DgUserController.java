@@ -39,6 +39,12 @@ public class DgUserController {
         return Result.success(isCreate);
     }
 
+    @PostMapping("/update")
+    public Result update(@Valid @RequestBody DgUserSaveReq req) {
+        int isCreate = dgUserService.update(req);
+        return Result.success(isCreate);
+    }
+
     @PostMapping("/delete")
     public Result delete(@Valid @RequestBody DgUserGetReq req) {
         int isDel = dgUserService.delete(req);
