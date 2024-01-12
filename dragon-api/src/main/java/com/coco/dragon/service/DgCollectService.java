@@ -127,7 +127,7 @@ public class DgCollectService {
      * @param req
      * @return
      */
-    public int delete(DgCollectGetReq req) {
+    public int cancel(DgCollectGetReq req) {
         DgCollectExample dgCollectExample = new DgCollectExample();
         DgCollectExample.Criteria criteria = dgCollectExample.createCriteria();
         criteria.andIdEqualTo(req.getId());
