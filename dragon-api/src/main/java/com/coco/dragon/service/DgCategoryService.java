@@ -66,6 +66,19 @@ public class DgCategoryService {
     }
 
     /**
+     * 获取所有
+     *
+     * @return
+     */
+    public List<DgCategory> all() {
+        DgCategoryExample dgCategoryExample = new DgCategoryExample();
+        DgCategoryExample.Criteria criteria = dgCategoryExample.createCriteria();
+        criteria.andFlagEqualTo(1);
+        return dgCategoryMapper.selectByExample(dgCategoryExample);
+
+    }
+
+    /**
      * 查询单条
      *
      * @param req

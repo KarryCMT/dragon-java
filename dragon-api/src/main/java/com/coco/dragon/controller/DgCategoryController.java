@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author liaoshen
  */
@@ -32,6 +34,12 @@ public class DgCategoryController {
     public Result page(@Valid @RequestBody DgCategoryQueryReq req) {
         PageInfo findPage = dgCategoryService.page(req);
         return Result.success(findPage);
+    }
+
+    @PostMapping("/find/all")
+    public Result all() {
+        List list = dgCategoryService.all();
+        return Result.success(list);
     }
 
     @PostMapping("/get")
