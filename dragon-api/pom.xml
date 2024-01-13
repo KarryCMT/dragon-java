@@ -16,6 +16,7 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
+<!--        rabbit 基础框架公共模块-->
         <dependency>
             <groupId>com.coco</groupId>
             <artifactId>common</artifactId>
