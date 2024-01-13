@@ -13,11 +13,14 @@ import com.coco.dragon.mapper.DgPostMapper;
 import com.coco.dragon.req.category.DgCategoryGetReq;
 import com.coco.dragon.req.category.DgCategoryQueryReq;
 import com.coco.dragon.req.category.DgCategorySaveReq;
+import com.coco.dragon.req.draft.DgDraftSaveReq;
+import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
 import com.coco.dragon.resp.category.DgCategoryResp;
 import com.coco.dragon.resp.post.DgPostResp;
+import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -38,6 +41,9 @@ public class DgPostService {
 
     @Resource
     private DgPostMapper dgPostMapper;
+
+    @Resource
+    private DgDraftService dgDraftService;
 
     /**
      * 获取分页
@@ -110,6 +116,41 @@ public class DgPostService {
 
 
     /**
+     * 新增
+     *
+     * @param req
+     * @return
+     */
+    public int draft(DgPostDraftReq req) {
+        DateTime now = DateTime.now();
+        DgPost post = BeanUtil.copyProperties(req, DgPost.class);
+        post.setId(SnowUtil.getSnowflakeNextId());
+        post.setCreateTime(now);
+        post.setUpdateTime(now);
+        post.setCreatorId(req.getUserId());
+        post.setUpdatorId(req.getUserId());
+        post.setFlag(1);
+        post.setStatus(0);
+        // 生成草稿
+        DgDraftSaveReq dgDraftSaveReq = new DgDraftSaveReq();
+        dgDraftSaveReq.setId(SnowUtil.getSnowflakeNextId());
+        dgDraftSaveReq.setPostId(post.getId());
+        dgDraftSaveReq.setUserId(req.getUserId());
+        dgDraftSaveReq.setCreateTime(now);
+        dgDraftSaveReq.setCreatorId(req.getUserId());
+        dgDraftSaveReq.setStatus(1);
+        dgDraftSaveReq.setFlag(1);
+
+        int isDraft = dgDraftService.create(dgDraftSaveReq);
+        int isPost = dgPostMapper.insert(post);
+        if (isDraft == 0 || isPost == 0) {
+            throw new RabbitException("创建草稿失败");
+        }
+        return 1;
+    }
+
+
+    /**
      * 修改
      *
      * @param req
@@ -123,8 +164,9 @@ public class DgPostService {
         DgPost post = BeanUtil.copyProperties(req, DgPost.class);
         post.setUpdateTime(now);
         post.setUpdatorId(1L);
-        return dgPostMapper.updateByExampleSelective(post,dgPostExample);
+        return dgPostMapper.updateByExampleSelective(post, dgPostExample);
     }
+
     /**
      * 删除
      *

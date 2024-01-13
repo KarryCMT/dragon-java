@@ -3,6 +3,7 @@ package com.coco.dragon.controller;
 import com.coco.dragon.req.category.DgCategoryGetReq;
 import com.coco.dragon.req.category.DgCategoryQueryReq;
 import com.coco.dragon.req.category.DgCategorySaveReq;
+import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
@@ -51,6 +52,12 @@ public class DgPostController {
     @PostMapping("/create")
     public Result create(@Valid @RequestBody DgPostSaveReq req) {
         int isCreate = dgPostService.create(req);
+        return Result.success(isCreate);
+    }
+
+    @PostMapping("/draft")
+    public Result draft(@Valid @RequestBody DgPostDraftReq req) {
+        int isCreate = dgPostService.draft(req);
         return Result.success(isCreate);
     }
 
