@@ -1,6 +1,7 @@
 package com.coco.dragon.req.footMark;
 
 import com.coco.dragon.req.BaseReq;
+import com.coco.dragon.req.PageReq;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgFootMarkQueryReq extends BaseReq {
+public class DgFootMarkQueryReq extends PageReq {
 
     @NotNull(message = "用户ID不能为空")
     private Long userId;

@@ -1,6 +1,7 @@
 package com.coco.dragon.req.collect;
 
 import com.coco.dragon.req.BaseReq;
+import com.coco.dragon.req.PageReq;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import lombok.Data;
  * @author liaoshen
  */
 @Data
-public class DgCollectQueryReq extends BaseReq {
+public class DgCollectQueryReq extends PageReq {
 
     @NotNull(message = "用户ID不能为空")
     private Long userId;

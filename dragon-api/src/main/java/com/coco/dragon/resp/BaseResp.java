@@ -40,4 +40,9 @@ public class BaseResp {
      * 删除标识
      */
     private Integer flag;
+
+    /**
+     * 状态
+     */
+    private Integer status;
 }

@@ -1,4 +1,4 @@
-package com.coco.dragon.resp.draft;
+package com.coco.dragon.resp.comment;
 
 import com.coco.dragon.resp.BaseResp;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgDraftResp extends BaseResp {
+public class DgCommentResp extends BaseResp {
 
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
@@ -23,5 +23,14 @@ public class DgDraftResp extends BaseResp {
     @JsonSerialize(using= ToStringSerializer.class)
     private Long userId;
 
-    private Integer status;
+    @JsonSerialize(using= ToStringSerializer.class)
+    private Long parentId;
+
+    @JsonSerialize(using= ToStringSerializer.class)
+    private Long answerId;
+
+    private String content;
+
+    private Integer isAuthor;
+
 }

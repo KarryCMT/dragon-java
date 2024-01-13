@@ -1,4 +1,4 @@
-package com.coco.dragon.req.draft;
+package com.coco.dragon.req.comment;
 
 import com.coco.dragon.req.BaseReq;
 import com.coco.dragon.req.PageReq;
@@ -9,7 +9,7 @@ import lombok.Data;
  * @author liaoshen
  */
 @Data
-public class DgDraftQueryReq extends PageReq {
+public class DgCommentQueryReq extends PageReq {
 
     @NotNull(message = "用户ID不能为空")
     private Long userId;

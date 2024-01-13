@@ -1,5 +1,6 @@
 package com.coco.dragon.req.post;
 
+import com.coco.dragon.req.BaseReq;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgPostDraftReq {
+public class DgPostDraftReq extends BaseReq {
     private Long id;
 
     private Long userId;
@@ -23,17 +24,5 @@ public class DgPostDraftReq {
     private String content;
 
     private String remark;
-
-    private Long creatorId;
-
-    private Date createTime;
-
-    private Long updatorId;
-
-    private Date updateTime;
-
-    private Integer status;
-
-    private Integer flag;
 
 }

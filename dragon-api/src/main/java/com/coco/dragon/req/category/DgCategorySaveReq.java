@@ -1,5 +1,6 @@
 package com.coco.dragon.req.category;
 
+import com.coco.dragon.req.BaseReq;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * @author liaoshen
  */
 @Data
-public class DgCategorySaveReq {
+public class DgCategorySaveReq extends BaseReq {
     private Long id;
 
     @NotBlank(message = "分类名称不能为空")
@@ -19,17 +20,5 @@ public class DgCategorySaveReq {
     private String cover;
 
     private String remark;
-
-    private Long creatorId;
-
-    private Date createTime;
-
-    private Long updatorId;
-
-    private Date updateTime;
-
-    private Integer status;
-
-    private Integer flag;
 
 }

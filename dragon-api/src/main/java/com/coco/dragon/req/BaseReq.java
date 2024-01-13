@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,13 +13,7 @@ import java.util.Date;
  */
 @Data
 public class BaseReq {
-    @NotNull(message = "当前分页不能为空")
-    private Integer pageNum;
 
-    @NotNull(message = "分页数量不能为空")
-    private Integer pageSize;
-
-    private Integer id;
     /**
      * 创建人
      */
@@ -33,19 +28,24 @@ public class BaseReq {
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 更新时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
+    /**
+     * 状态
+     */
+    private Integer status;
 
     /**
      * 标志：0-已删除、1-未删除
      */
     private Integer flag;
-
-    private static final long serialVersionUID = 1L;
 
 }
