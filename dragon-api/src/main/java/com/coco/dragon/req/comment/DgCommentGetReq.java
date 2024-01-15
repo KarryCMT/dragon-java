@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 public class DgCommentGetReq {
 
-    @NotNull(message = "用户ID不能为空")
-    private Long userId;
+    @NotNull(message = "帖子ID不能为空")
+    private Long postId;
 
-    @NotNull(message = "ID不能为空")
     private Long id;
+
+    private Long userId;
 
 }

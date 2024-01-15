@@ -1,5 +1,6 @@
 package com.coco.dragon.resp.comment;
 
+import com.coco.dragon.domain.DgComment;
 import com.coco.dragon.resp.BaseResp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liaoshen
@@ -28,6 +30,8 @@ public class DgCommentResp extends BaseResp {
 
     @JsonSerialize(using= ToStringSerializer.class)
     private Long answerId;
+
+    private List<DgComment> children;
 
     private String content;
 

@@ -2,7 +2,9 @@ package com.coco.dragon.req.follow;
 
 import com.coco.dragon.req.BaseReq;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author liaoshen

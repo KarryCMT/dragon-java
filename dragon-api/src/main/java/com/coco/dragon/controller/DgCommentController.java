@@ -33,8 +33,8 @@ public class DgCommentController {
     }
 
     @PostMapping("/find/all")
-    public Result all() {
-        List list = dgCommentService.all();
+    public Result all(@RequestBody DgCommentGetReq req) {
+        List list = dgCommentService.all(req);
         return Result.success(list);
     }
 

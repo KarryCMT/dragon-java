@@ -16,6 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class DgFollowService {
 
     @Resource
     private DgFollowMapper dgFollowMapper;
+
+
 
     /**
      * 获取分页
@@ -84,7 +87,7 @@ public class DgFollowService {
     }
 
     /**
-     * 新增收藏
+     * 新增关注
      *
      * @param req
      * @return
@@ -97,7 +100,7 @@ public class DgFollowService {
         criteria.andUserIdEqualTo(req.getUserId());
         List<DgFollow> list= dgFollowMapper.selectByExample(dgFollowExample);
         if (list.size() == 1){
-            throw new RabbitException("该用户已收藏");
+            throw new RabbitException("该用户已关注");
         }
         if (req.getUserId().equals(req.getFollowedId())){
             throw new RabbitException("不能关注该自己");
@@ -115,7 +118,7 @@ public class DgFollowService {
 
 
     /**
-     * 取消收藏
+     * 取消关注
      *
      * @param req
      * @return

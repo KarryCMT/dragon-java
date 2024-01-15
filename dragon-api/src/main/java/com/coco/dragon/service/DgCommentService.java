@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author liaoshen
@@ -61,10 +62,11 @@ public class DgCommentService {
         criteria.andFlagEqualTo(1);
         List<DgComment> list = dgCommentMapper.selectByExampleWithBLOBs(dgCommentExample);
         List<DgCommentResp> respList = new ArrayList<>();
-        list.forEach(v->{
-            DgCommentResp resp = BeanUtil.copyProperties(v,DgCommentResp.class);
+        for (DgComment dgComment: list){
+            
+            DgCommentResp resp = BeanUtil.copyProperties(dgComment,DgCommentResp.class);
             respList.add(resp);
-        });
+        }
         PageInfo<DgCommentResp> pageInfo = new PageInfo<>(respList);
         pageInfo.setPageNum(req.getPageNum());
         pageInfo.setPageSize(req.getPageSize());
@@ -76,11 +78,21 @@ public class DgCommentService {
      *
      * @return
      */
-    public List<DgComment> all() {
+    public List<DgCommentResp> all(DgCommentGetReq req) {
         DgCommentExample dgCommentExample = new DgCommentExample();
         DgCommentExample.Criteria criteria = dgCommentExample.createCriteria();
         criteria.andFlagEqualTo(1);
-        return dgCommentMapper.selectByExample(dgCommentExample);
+        criteria.andPostIdEqualTo(req.getPostId());
+        List<DgComment> dgComments = dgCommentMapper.selectByExampleWithBLOBs(dgCommentExample);
+        List<DgCommentResp> respList = new ArrayList<>();
+        List<DgComment> rootComments = dgComments.stream().filter(comment -> comment.getParentId() == 0).toList();
+        for (DgComment rootComment: rootComments){
+            respList.add(BeanUtil.copyProperties(rootComment,DgCommentResp.class));
+        }
+        for (DgCommentResp item:respList){
+            item.setChildren(dgComments.stream().filter(comment->comment.getParentId().equals(item.getId())).collect(Collectors.toList()));
+        }
+        return respList;
 
     }
 
