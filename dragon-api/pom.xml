@@ -19,13 +19,9 @@
 <!--        rabbit 基础框架公共模块-->
         <dependency>
             <groupId>com.coco</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-service</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <finalName>/dist/${artifactId}</finalName>
