@@ -1,22 +1,26 @@
 package com.coco.dragon.client;
 
-import com.coco.rabbit.common.resp.Result;
+import cn.hutool.http.server.HttpServerRequest;
+import com.coco.dragon.req.user.DgUserGetReq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Map;
 
 /**
  * @author liaoshen
  */
 @Component
-@FeignClient(name = "system-service")
+@FeignClient(name = "system-service",path = "",url = "http://localhost:8001/api/v1")
 public interface UserFeignClient {
 
     /**
-     * userController中的hello
-     * @param name
+     *
+     * @param req
      * @return
      */
-    @GetMapping("hello")
-    Result hello(String name);
+    @PostMapping("/rabbit/system/member/get")
+    Map<String,Object> getMember(DgUserGetReq req);
 }
