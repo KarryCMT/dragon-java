@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="content_type" jdbcType="INTEGER" property="contentType" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="answer_id" jdbcType="BIGINT" property="answerId" />
     <result column="is_author" jdbcType="INTEGER" property="isAuthor" />
@@ -77,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, post_id, user_id, parent_id, answer_id, is_author, `status`, creator_id, create_time, 
-    updator_id, update_time, flag
+    id, post_id, user_id, content_type, parent_id, answer_id, is_author, `status`, creator_id, 
+    create_time, updator_id, update_time, flag
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -133,15 +134,15 @@
   </delete>
   <insert id="insert" parameterType="com.coco.dragon.domain.DgComment">
     insert into dg_comment (id, post_id, user_id, 
-      parent_id, answer_id, is_author, 
-      `status`, creator_id, create_time, 
-      updator_id, update_time, flag, 
-      content)
+      content_type, parent_id, answer_id, 
+      is_author, `status`, creator_id, 
+      create_time, updator_id, update_time, 
+      flag, content)
     values (#{id,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
-      #{parentId,jdbcType=BIGINT}, #{answerId,jdbcType=BIGINT}, #{isAuthor,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updatorId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{contentType,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT}, #{answerId,jdbcType=BIGINT}, 
+      #{isAuthor,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{creatorId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatorId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{flag,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.coco.dragon.domain.DgComment">
     insert into dg_comment
@@ -154,6 +155,9 @@
       </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="contentType != null">
+        content_type,
       </if>
       <if test="parentId != null">
         parent_id,
@@ -195,6 +199,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="contentType != null">
+        #{contentType,jdbcType=INTEGER},
       </if>
       <if test="parentId != null">
         #{parentId,jdbcType=BIGINT},
@@ -246,6 +253,9 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
+      <if test="record.contentType != null">
+        content_type = #{record.contentType,jdbcType=INTEGER},
+      </if>
       <if test="record.parentId != null">
         parent_id = #{record.parentId,jdbcType=BIGINT},
       </if>
@@ -286,6 +296,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       post_id = #{record.postId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
+      content_type = #{record.contentType,jdbcType=INTEGER},
       parent_id = #{record.parentId,jdbcType=BIGINT},
       answer_id = #{record.answerId,jdbcType=BIGINT},
       is_author = #{record.isAuthor,jdbcType=INTEGER},
@@ -305,6 +316,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       post_id = #{record.postId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
+      content_type = #{record.contentType,jdbcType=INTEGER},
       parent_id = #{record.parentId,jdbcType=BIGINT},
       answer_id = #{record.answerId,jdbcType=BIGINT},
       is_author = #{record.isAuthor,jdbcType=INTEGER},
@@ -326,6 +338,9 @@
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType,jdbcType=INTEGER},
       </if>
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=BIGINT},
@@ -364,6 +379,7 @@
     update dg_comment
     set post_id = #{postId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
+      content_type = #{contentType,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=BIGINT},
       answer_id = #{answerId,jdbcType=BIGINT},
       is_author = #{isAuthor,jdbcType=INTEGER},
@@ -380,6 +396,7 @@
     update dg_comment
     set post_id = #{postId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
+      content_type = #{contentType,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=BIGINT},
       answer_id = #{answerId,jdbcType=BIGINT},
       is_author = #{isAuthor,jdbcType=INTEGER},

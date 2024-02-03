@@ -9,6 +9,8 @@ public class DgComment {
 
     private Long userId;
 
+    private Integer contentType;
+
     private Long parentId;
 
     private Long answerId;
@@ -51,6 +53,14 @@ public class DgComment {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Integer getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(Integer contentType) {
+        this.contentType = contentType;
     }
 
     public Long getParentId() {
@@ -142,6 +152,7 @@ public class DgComment {
         sb.append(", id=").append(id);
         sb.append(", postId=").append(postId);
         sb.append(", userId=").append(userId);
+        sb.append(", contentType=").append(contentType);
         sb.append(", parentId=").append(parentId);
         sb.append(", answerId=").append(answerId);
         sb.append(", isAuthor=").append(isAuthor);
