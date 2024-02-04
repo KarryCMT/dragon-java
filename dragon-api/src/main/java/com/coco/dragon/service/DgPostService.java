@@ -67,7 +67,7 @@ public class DgPostService {
             //获取传来的信息
             params.put("id", dgPost.getUserId());
             //用userId去调用 接口 找到对应的用户名称存入 name
-            DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/get", params, DgPost.class);
+            DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/find/info", params, DgPost.class);
             dgPost.setName(call.getName());
         }
         pageInfo.setPageNum(req.getPageNum());
