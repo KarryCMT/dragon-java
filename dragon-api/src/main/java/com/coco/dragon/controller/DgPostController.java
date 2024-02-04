@@ -15,6 +15,7 @@ import com.coco.rabbit.common.resp.Result;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +27,17 @@ import java.util.List;
  * @author liaoshen
  */
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/post  ")
 public class DgPostController {
-    @Resource
+
+    @Autowired
     private DgPostService dgPostService;
 
+    /**
+     * 首页 分页
+     * @param req
+     * @return
+     */
     @PostMapping("/find/page")
     public Result page(@Valid @RequestBody DgPostQueryReq req) {
         PageInfo findPage = dgPostService.page(req);

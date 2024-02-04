@@ -23,4 +23,12 @@ public interface UserFeignClient {
      */
     @PostMapping("/rabbit/system/member/get")
     Map<String,Object> getMember(DgUserGetReq req);
+
+    /**
+     *
+     * @param req
+     * @return
+     */
+    @PostMapping("/system/member/find/all")
+    Map<String,Object> getMemberFindAll(DgUserGetReq req);
 }

@@ -1,8 +1,17 @@
 package com.coco.dragon.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class DgPost {
+
+    /**
+     * 用户名称
+     */
+    private String name;
+
     private Long id;
 
     private Long userId;

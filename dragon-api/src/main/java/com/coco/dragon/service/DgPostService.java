@@ -4,22 +4,16 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.cloud.commons.lang.StringUtils;
-import com.coco.dragon.domain.DgCategory;
-import com.coco.dragon.domain.DgCategoryExample;
 import com.coco.dragon.domain.DgPost;
 import com.coco.dragon.domain.DgPostExample;
-import com.coco.dragon.mapper.DgCategoryMapper;
 import com.coco.dragon.mapper.DgPostMapper;
-import com.coco.dragon.req.category.DgCategoryGetReq;
-import com.coco.dragon.req.category.DgCategoryQueryReq;
-import com.coco.dragon.req.category.DgCategorySaveReq;
 import com.coco.dragon.req.draft.DgDraftSaveReq;
 import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
-import com.coco.dragon.resp.category.DgCategoryResp;
 import com.coco.dragon.resp.post.DgPostResp;
+import com.coco.dragon.util.ApiClient;
 import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
 import com.github.pagehelper.PageHelper;
@@ -29,7 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liaoshen
@@ -66,6 +62,17 @@ public class DgPostService {
         criteria.andFlagEqualTo(1);
         List<DgPost> list = dgPostMapper.selectByExample(dgPostExample);
         PageInfo<DgPost> pageInfo = new PageInfo<>(list);
+
+        for (DgPost dgPost : pageInfo.getList()) {
+
+            Map<String, Object> params = new HashMap<>();
+            //获取传来的信息
+            params.put("id", dgPost.getUserId());
+            //用userId去调用 接口 找到对应的用户名称存入 name
+            DgPost call = ApiClient.call("http://127.0.0.1:8000/api/v1/rabbit/system/member/get", params, DgPost.class);
+            dgPost.setName(call.getName());
+        }
+
         pageInfo.setPageNum(req.getPageNum());
         pageInfo.setPageSize(req.getPageSize());
         return pageInfo;
