@@ -1,16 +1,14 @@
 package com.coco.dragon.domain;
 
+import com.coco.dragon.resp.post.DgPostResp;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class DgPost {
+public class DgPost extends DgPostResp {
 
-    /**
-     * 用户名称
-     */
-    private String name;
+
 
     private Long id;
 

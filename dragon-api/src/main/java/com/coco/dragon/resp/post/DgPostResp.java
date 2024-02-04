@@ -25,6 +25,10 @@ public class DgPostResp extends BaseResp {
 
     private String title;
 
+    private String avatar;
+
+    private String name;
+
     private String pictures;
 
     private String remark;
