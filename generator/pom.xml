@@ -31,14 +31,9 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-<!--                    <configurationFile>src/main/resources/generator-config-post.xml</configurationFile>-->
-<!--                    <configurationFile>src/main/resources/generator-config-user.xml</configurationFile>-->
-<!--                    <configurationFile>src/main/resources/generator-config-category.xml</configurationFile>-->
-                    <configurationFile>src/main/resources/generator-config-comment.xml</configurationFile>
-<!--                    <configurationFile>src/main/resources/generator-config-collect.xml</configurationFile>-->
-<!--                    <configurationFile>src/main/resources/generator-config-draft.xml</configurationFile>-->
-<!--                    <configurationFile>src/main/resources/generator-config-follow.xml</configurationFile>-->
-<!--                    <configurationFile>src/main/resources/generator-config-foot_mark.xml</configurationFile>-->
+<!--                    <configurationFile>src/main/resources/generator-dragon.xml</configurationFile>-->
+                        <configurationFile>src/main/resources/generator-rabbit.xml</configurationFile>
+
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>

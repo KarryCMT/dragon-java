@@ -23,24 +23,25 @@
 
         <!-- 配置数据源，需要根据自己的项目修改 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://139.155.77.110:3306/dragon-dev?serverTimezone=Asia/Shanghai"
-                        userId="dragon-dev"
-                        password="dragon-dev">
+                        connectionURL="jdbc:mysql://139.155.77.110:3306/rabbit_system?serverTimezone=Asia/Shanghai"
+                        userId="rabbit_system"
+                        password="rabbit_system">
         </jdbcConnection>
 
         <!-- domain类的位置 targetProject是相对pom.xml的路径-->
-        <javaModelGenerator targetProject="../dragon-api/src/main/java"
-                            targetPackage="com.coco.dragon.domain"/>
+        <javaModelGenerator targetProject="../generator/src/main/java"
+                            targetPackage="com.coco.rabbit.domain"/>
 
         <!-- mapper xml的位置 targetProject是相对pom.xml的路径 -->
-        <sqlMapGenerator targetProject="../dragon-api/src/main/resources"
+        <sqlMapGenerator targetProject="../generator/src/main/resources"
                          targetPackage="mapper"/>
 
         <!-- mapper类的位置 targetProject是相对pom.xml的路径 -->
-        <javaClientGenerator targetProject="../dragon-api/src/main/java"
-                             targetPackage="com.coco.dragon.mapper"
+        <javaClientGenerator targetProject="../generator/src/main/java"
+                             targetPackage="com.coco.rabbit.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="dg_foot_mark" domainObjectName="DgFootMark"/>
+        <!--   用户  -->
+        <table tableName="ss_member" domainObjectName="SsMember"/>
     </context>
 </generatorConfiguration>

@@ -41,6 +41,19 @@
                              targetPackage="com.coco.dragon.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="dg_follow" domainObjectName="DgFollow"/>
+        <!--   帖子  -->
+<!--        <table tableName="dg_post" domainObjectName="DgPost"/>-->
+        <!--   足迹  -->
+<!--        <table tableName="dg_foot_mark" domainObjectName="DgFootMark"/>-->
+        <!--   关注  -->
+<!--        <table tableName="dg_follow" domainObjectName="DgFollow"/>-->
+        <!--   草稿  -->
+<!--        <table tableName="dg_draft" domainObjectName="DgDraft"/>-->
+        <!--   评论  -->
+<!--        <table tableName="dg_comment" domainObjectName="DgComment"/>-->
+        <!--   收藏  -->
+<!--        <table tableName="dg_collect" domainObjectName="DgCollect"/>-->
+        <!--   分类  -->
+<!--        <table tableName="dg_category" domainObjectName="DgCategory"/>-->
     </context>
 </generatorConfiguration>
