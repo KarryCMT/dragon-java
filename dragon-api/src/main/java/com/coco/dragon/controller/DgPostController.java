@@ -27,7 +27,7 @@ import java.util.List;
  * @author liaoshen
  */
 @RestController
-@RequestMapping("/post  ")
+@RequestMapping("/post")
 public class DgPostController {
 
     @Autowired

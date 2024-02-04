@@ -26,7 +26,13 @@ public class DgUserController {
 
     @PostMapping("/get")
     public Result get(@Valid @RequestBody DgUserGetReq req) {
-         Map<String,Object> map = dgUserService.getMemberFindAll(req);
+         Map<String,Object> map = dgUserService.getMember(req);
+        return Result.success(map);
+    }
+
+    @PostMapping("/all")
+    public Result findAll() {
+        Map<String,Object> map = dgUserService.getMemberFindAll();
         return Result.success(map);
     }
 
