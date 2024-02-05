@@ -1,4 +1,4 @@
-package com.coco.dragon.req.category;
+package com.coco.dragon.req.topic;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.Data;
  * @author liaoshen
  */
 @Data
-public class DgCategoryGetReq {
+public class DgTopicGetReq {
 
     @NotNull(message = "【ID】不能为空")
     private Long id;

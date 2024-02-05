@@ -1,18 +1,15 @@
-package com.coco.dragon.resp.category;
+package com.coco.dragon.resp.topic;
 
 import com.coco.dragon.resp.BaseResp;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @author liaoshen
  */
 @Data
-public class DgCategoryResp extends BaseResp {
+public class DgTopicResp extends BaseResp {
 
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;

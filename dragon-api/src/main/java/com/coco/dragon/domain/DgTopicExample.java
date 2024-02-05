@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DgCategoryExample {
+public class DgTopicExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DgCategoryExample() {
+    public DgTopicExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -165,143 +165,143 @@ public class DgCategoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("`name` is null");
+        public Criteria andTopicNameIsNull() {
+            addCriterion("topic_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("`name` is not null");
+        public Criteria andTopicNameIsNotNull() {
+            addCriterion("topic_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("`name` =", value, "name");
+        public Criteria andTopicNameEqualTo(String value) {
+            addCriterion("topic_name =", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("`name` <>", value, "name");
+        public Criteria andTopicNameNotEqualTo(String value) {
+            addCriterion("topic_name <>", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("`name` >", value, "name");
+        public Criteria andTopicNameGreaterThan(String value) {
+            addCriterion("topic_name >", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("`name` >=", value, "name");
+        public Criteria andTopicNameGreaterThanOrEqualTo(String value) {
+            addCriterion("topic_name >=", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("`name` <", value, "name");
+        public Criteria andTopicNameLessThan(String value) {
+            addCriterion("topic_name <", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("`name` <=", value, "name");
+        public Criteria andTopicNameLessThanOrEqualTo(String value) {
+            addCriterion("topic_name <=", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("`name` like", value, "name");
+        public Criteria andTopicNameLike(String value) {
+            addCriterion("topic_name like", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("`name` not like", value, "name");
+        public Criteria andTopicNameNotLike(String value) {
+            addCriterion("topic_name not like", value, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("`name` in", values, "name");
+        public Criteria andTopicNameIn(List<String> values) {
+            addCriterion("topic_name in", values, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("`name` not in", values, "name");
+        public Criteria andTopicNameNotIn(List<String> values) {
+            addCriterion("topic_name not in", values, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("`name` between", value1, value2, "name");
+        public Criteria andTopicNameBetween(String value1, String value2) {
+            addCriterion("topic_name between", value1, value2, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("`name` not between", value1, value2, "name");
+        public Criteria andTopicNameNotBetween(String value1, String value2) {
+            addCriterion("topic_name not between", value1, value2, "topicName");
             return (Criteria) this;
         }
 
-        public Criteria andCoverIsNull() {
-            addCriterion("cover is null");
+        public Criteria andTopicCoverIsNull() {
+            addCriterion("topic_cover is null");
             return (Criteria) this;
         }
 
-        public Criteria andCoverIsNotNull() {
-            addCriterion("cover is not null");
+        public Criteria andTopicCoverIsNotNull() {
+            addCriterion("topic_cover is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCoverEqualTo(String value) {
-            addCriterion("cover =", value, "cover");
+        public Criteria andTopicCoverEqualTo(String value) {
+            addCriterion("topic_cover =", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverNotEqualTo(String value) {
-            addCriterion("cover <>", value, "cover");
+        public Criteria andTopicCoverNotEqualTo(String value) {
+            addCriterion("topic_cover <>", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverGreaterThan(String value) {
-            addCriterion("cover >", value, "cover");
+        public Criteria andTopicCoverGreaterThan(String value) {
+            addCriterion("topic_cover >", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverGreaterThanOrEqualTo(String value) {
-            addCriterion("cover >=", value, "cover");
+        public Criteria andTopicCoverGreaterThanOrEqualTo(String value) {
+            addCriterion("topic_cover >=", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverLessThan(String value) {
-            addCriterion("cover <", value, "cover");
+        public Criteria andTopicCoverLessThan(String value) {
+            addCriterion("topic_cover <", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverLessThanOrEqualTo(String value) {
-            addCriterion("cover <=", value, "cover");
+        public Criteria andTopicCoverLessThanOrEqualTo(String value) {
+            addCriterion("topic_cover <=", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverLike(String value) {
-            addCriterion("cover like", value, "cover");
+        public Criteria andTopicCoverLike(String value) {
+            addCriterion("topic_cover like", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverNotLike(String value) {
-            addCriterion("cover not like", value, "cover");
+        public Criteria andTopicCoverNotLike(String value) {
+            addCriterion("topic_cover not like", value, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverIn(List<String> values) {
-            addCriterion("cover in", values, "cover");
+        public Criteria andTopicCoverIn(List<String> values) {
+            addCriterion("topic_cover in", values, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverNotIn(List<String> values) {
-            addCriterion("cover not in", values, "cover");
+        public Criteria andTopicCoverNotIn(List<String> values) {
+            addCriterion("topic_cover not in", values, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverBetween(String value1, String value2) {
-            addCriterion("cover between", value1, value2, "cover");
+        public Criteria andTopicCoverBetween(String value1, String value2) {
+            addCriterion("topic_cover between", value1, value2, "topicCover");
             return (Criteria) this;
         }
 
-        public Criteria andCoverNotBetween(String value1, String value2) {
-            addCriterion("cover not between", value1, value2, "cover");
+        public Criteria andTopicCoverNotBetween(String value1, String value2) {
+            addCriterion("topic_cover not between", value1, value2, "topicCover");
             return (Criteria) this;
         }
 

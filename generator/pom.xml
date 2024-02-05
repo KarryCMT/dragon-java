@@ -31,8 +31,8 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-<!--                    <configurationFile>src/main/resources/generator-dragon.xml</configurationFile>-->
-                        <configurationFile>src/main/resources/generator-rabbit.xml</configurationFile>
+                    <configurationFile>src/main/resources/generator-dragon.xml</configurationFile>
+<!--                        <configurationFile>src/main/resources/generator-rabbit.xml</configurationFile>-->
 
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>

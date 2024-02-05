@@ -1,19 +1,13 @@
 package com.coco.dragon.controller;
 
-import com.coco.dragon.req.category.DgCategoryGetReq;
-import com.coco.dragon.req.category.DgCategoryQueryReq;
-import com.coco.dragon.req.category.DgCategorySaveReq;
 import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
-import com.coco.dragon.resp.category.DgCategoryResp;
 import com.coco.dragon.resp.post.DgPostResp;
-import com.coco.dragon.service.DgCategoryService;
 import com.coco.dragon.service.DgPostService;
 import com.coco.rabbit.common.resp.Result;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

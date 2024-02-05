@@ -1,6 +1,5 @@
-package com.coco.dragon.req.category;
+package com.coco.dragon.req.topic;
 
-import com.coco.dragon.req.BaseReq;
 import com.coco.dragon.req.PageReq;
 import lombok.Data;
 
@@ -8,7 +7,7 @@ import lombok.Data;
  * @author liaoshen
  */
 @Data
-public class DgCategoryQueryReq extends PageReq {
+public class DgTopicQueryReq extends PageReq {
 
     private String name;
 

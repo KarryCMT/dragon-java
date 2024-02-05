@@ -2,12 +2,12 @@ package com.coco.dragon.domain;
 
 import java.util.Date;
 
-public class DgCategory {
+public class DgTopic {
     private Long id;
 
-    private String name;
+    private String topicName;
 
-    private String cover;
+    private String topicCover;
 
     private String remark;
 
@@ -31,20 +31,20 @@ public class DgCategory {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTopicName() {
+        return topicName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
     }
 
-    public String getCover() {
-        return cover;
+    public String getTopicCover() {
+        return topicCover;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setTopicCover(String topicCover) {
+        this.topicCover = topicCover;
     }
 
     public String getRemark() {
@@ -110,8 +110,8 @@ public class DgCategory {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", cover=").append(cover);
+        sb.append(", topicName=").append(topicName);
+        sb.append(", topicCover=").append(topicCover);
         sb.append(", remark=").append(remark);
         sb.append(", creatorId=").append(creatorId);
         sb.append(", createTime=").append(createTime);

@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.coco.dragon.mapper.DgPostMapper">
-  <resultMap id="BaseResultMap" type="com.coco.dragon.domain.DgPost">
+<mapper namespace="com.coco.dragon.mapper.DgLikeMapper">
+  <resultMap id="BaseResultMap" type="com.coco.dragon.domain.DgLike">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="topic_id" jdbcType="BIGINT" property="topicId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="pictures" jdbcType="VARCHAR" property="pictures" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="creator_id" jdbcType="BIGINT" property="creatorId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updator_id" jdbcType="BIGINT" property="updatorId" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.coco.dragon.domain.DgPost">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,21 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, topic_id, title, pictures, remark, `status`, creator_id, create_time, 
-    updator_id, update_time, flag
+    id, post_id, user_id, creator_id, create_time, updator_id, update_time, `status`, 
+    flag
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.coco.dragon.domain.DgPostExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExample" parameterType="com.coco.dragon.domain.DgLikeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from dg_post
+    from dg_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -99,73 +88,43 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.coco.dragon.domain.DgPostExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from dg_post
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from dg_post
+    from dg_like
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from dg_post
+    delete from dg_like
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.coco.dragon.domain.DgPostExample">
-    delete from dg_post
+  <delete id="deleteByExample" parameterType="com.coco.dragon.domain.DgLikeExample">
+    delete from dg_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.coco.dragon.domain.DgPost">
-    insert into dg_post (id, user_id, topic_id, 
-      title, pictures, remark, 
-      `status`, creator_id, create_time, 
-      updator_id, update_time, flag, 
-      content)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{topicId,jdbcType=BIGINT}, 
-      #{title,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updatorId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, 
-      #{content,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.coco.dragon.domain.DgLike">
+    insert into dg_like (id, post_id, user_id, 
+      creator_id, create_time, updator_id, 
+      update_time, `status`, flag
+      )
+    values (#{id,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updatorId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.coco.dragon.domain.DgPost">
-    insert into dg_post
+  <insert id="insertSelective" parameterType="com.coco.dragon.domain.DgLike">
+    insert into dg_like
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
+      <if test="postId != null">
+        post_id,
+      </if>
       <if test="userId != null">
         user_id,
-      </if>
-      <if test="topicId != null">
-        topic_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="pictures != null">
-        pictures,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        `status`,
       </if>
       <if test="creatorId != null">
         creator_id,
@@ -179,34 +138,22 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="status != null">
+        `status`,
+      </if>
       <if test="flag != null">
         flag,
-      </if>
-      <if test="content != null">
-        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="topicId != null">
-        #{topicId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="pictures != null">
-        #{pictures,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
       </if>
       <if test="creatorId != null">
         #{creatorId,jdbcType=BIGINT},
@@ -220,43 +167,31 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="flag != null">
         #{flag,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.coco.dragon.domain.DgPostExample" resultType="java.lang.Long">
-    select count(*) from dg_post
+  <select id="countByExample" parameterType="com.coco.dragon.domain.DgLikeExample" resultType="java.lang.Long">
+    select count(*) from dg_like
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update dg_post
+    update dg_like
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=BIGINT},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.topicId != null">
-        topic_id = #{record.topicId,jdbcType=BIGINT},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pictures != null">
-        pictures = #{record.pictures,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.creatorId != null">
         creator_id = #{record.creatorId,jdbcType=BIGINT},
@@ -270,74 +205,40 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.flag != null">
         flag = #{record.flag,jdbcType=INTEGER},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update dg_post
-    set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      topic_id = #{record.topicId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      pictures = #{record.pictures,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
-      creator_id = #{record.creatorId,jdbcType=BIGINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      updator_id = #{record.updatorId,jdbcType=BIGINT},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      flag = #{record.flag,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
-    update dg_post
+    update dg_like
     set id = #{record.id,jdbcType=BIGINT},
+      post_id = #{record.postId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
-      topic_id = #{record.topicId,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      pictures = #{record.pictures,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
       creator_id = #{record.creatorId,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       updator_id = #{record.updatorId,jdbcType=BIGINT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      `status` = #{record.status,jdbcType=INTEGER},
       flag = #{record.flag,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.coco.dragon.domain.DgPost">
-    update dg_post
+  <update id="updateByPrimaryKeySelective" parameterType="com.coco.dragon.domain.DgLike">
+    update dg_like
     <set>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="topicId != null">
-        topic_id = #{topicId,jdbcType=BIGINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="pictures != null">
-        pictures = #{pictures,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
       </if>
       <if test="creatorId != null">
         creator_id = #{creatorId,jdbcType=BIGINT},
@@ -351,43 +252,24 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
       <if test="flag != null">
         flag = #{flag,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.coco.dragon.domain.DgPost">
-    update dg_post
-    set user_id = #{userId,jdbcType=BIGINT},
-      topic_id = #{topicId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      pictures = #{pictures,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.coco.dragon.domain.DgLike">
+    update dg_like
+    set post_id = #{postId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
       creator_id = #{creatorId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       updator_id = #{updatorId,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.coco.dragon.domain.DgPost">
-    update dg_post
-    set user_id = #{userId,jdbcType=BIGINT},
-      topic_id = #{topicId,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      pictures = #{pictures,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER},
-      creator_id = #{creatorId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      updator_id = #{updatorId,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>

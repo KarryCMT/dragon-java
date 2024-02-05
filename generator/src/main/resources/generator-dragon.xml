@@ -42,7 +42,7 @@
                              type="XMLMAPPER"/>
 
         <!--   帖子  -->
-<!--        <table tableName="dg_post" domainObjectName="DgPost"/>-->
+        <table tableName="dg_post" domainObjectName="DgPost"/>
         <!--   足迹  -->
 <!--        <table tableName="dg_foot_mark" domainObjectName="DgFootMark"/>-->
         <!--   关注  -->
@@ -54,6 +54,8 @@
         <!--   收藏  -->
 <!--        <table tableName="dg_collect" domainObjectName="DgCollect"/>-->
         <!--   分类  -->
-<!--        <table tableName="dg_category" domainObjectName="DgCategory"/>-->
+<!--        <table tableName="dg_topic" domainObjectName="DgTopic"/>-->
+        <!--   点赞  -->
+<!--        <table tableName="dg_like" domainObjectName="DgLike"/>-->
     </context>
 </generatorConfiguration>

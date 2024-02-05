@@ -1,7 +1,5 @@
 package com.coco.dragon.mapper;
 
-import com.coco.dragon.domain.DgCategory;
-import com.coco.dragon.domain.DgCategoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
