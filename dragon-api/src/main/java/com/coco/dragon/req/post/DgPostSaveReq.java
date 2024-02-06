@@ -15,7 +15,7 @@ public class DgPostSaveReq extends BaseReq {
 
     private Long userId;
 
-    private Long categoryId;
+    private Long topicId;
 
     @NotBlank(message = "标题不能为空")
     private String title;

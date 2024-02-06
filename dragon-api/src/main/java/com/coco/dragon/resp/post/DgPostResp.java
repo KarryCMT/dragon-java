@@ -21,7 +21,7 @@ public class DgPostResp extends BaseResp {
     private Long userId;
 
     @JsonSerialize(using= ToStringSerializer.class)
-    private Long categoryId;
+    private Long topicId;
 
     private String title;
 

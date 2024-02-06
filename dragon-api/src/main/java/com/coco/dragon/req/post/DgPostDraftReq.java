@@ -15,7 +15,7 @@ public class DgPostDraftReq extends BaseReq {
 
     private Long userId;
 
-    private Long categoryId;
+    private Long topicId;
 
     private String title;
 
