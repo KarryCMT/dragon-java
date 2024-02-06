@@ -14,13 +14,13 @@ import java.util.Date;
 @Data
 public class DgPostResp extends BaseResp {
 
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long topicId;
 
     private String title;
@@ -35,5 +35,13 @@ public class DgPostResp extends BaseResp {
 
     private String content;
 
-    private Long likeCount;
+    /**
+     * 点赞数
+     */
+    private Long likeCount = 0L;
+
+    /**
+     * 是不是当前人点的赞  false-不是  true-是
+     */
+    private Boolean isLike = false;
 }

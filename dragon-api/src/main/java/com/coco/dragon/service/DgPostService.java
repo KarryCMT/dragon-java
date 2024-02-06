@@ -9,6 +9,7 @@ import com.coco.dragon.domain.DgPostExample;
 import com.coco.dragon.mapper.DgPostMapper;
 import com.coco.dragon.req.draft.DgDraftSaveReq;
 import com.coco.dragon.req.like.DgLikeGetReq;
+import com.coco.dragon.req.like.DgLikeSaveReq;
 import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
@@ -80,11 +81,14 @@ public class DgPostService {
                 DgLikeGetReq likeGetReq = new DgLikeGetReq();
                 likeGetReq.setPostId(dgPost.getId());
                 long likeCount = dgLikeService.all(likeGetReq);
+                DgLikeSaveReq dgLikeSaveReq = new DgLikeSaveReq();
+                dgLikeSaveReq.setPostId(dgPost.getId());
+                dgLikeSaveReq.setUserId(dgPost.getUserId());
+                boolean isLike = dgLikeService.isLike(dgLikeSaveReq);
                 dgPostResp.setLikeCount(likeCount);
+                dgPostResp.setIsLike(isLike);
                 postRespArrayList.add(dgPostResp);
             }
-
-
         }
         pageInfo.setList(postRespArrayList);
         pageInfo.setPageNum(req.getPageNum());
