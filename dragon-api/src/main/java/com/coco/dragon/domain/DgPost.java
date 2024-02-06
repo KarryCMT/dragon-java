@@ -1,8 +1,10 @@
 package com.coco.dragon.domain;
 
+import com.coco.dragon.resp.post.DgPostResp;
+
 import java.util.Date;
 
-public class DgPost {
+public class DgPost extends DgPostResp {
     private Long id;
 
     private Long userId;

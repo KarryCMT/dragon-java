@@ -8,6 +8,7 @@ import com.coco.dragon.domain.DgPost;
 import com.coco.dragon.domain.DgPostExample;
 import com.coco.dragon.mapper.DgPostMapper;
 import com.coco.dragon.req.draft.DgDraftSaveReq;
+import com.coco.dragon.req.like.DgLikeGetReq;
 import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
@@ -42,6 +43,9 @@ public class DgPostService {
     @Resource
     private DgDraftService dgDraftService;
 
+    @Resource
+    private DgLikeService dgLikeService;
+
     /**
      * 获取分页
      *
@@ -61,6 +65,7 @@ public class DgPostService {
             criteria.andStatusEqualTo(req.getStatus());
         }
         criteria.andFlagEqualTo(1);
+
         List<DgPost> list = dgPostMapper.selectByExample(dgPostExample);
         PageInfo<DgPostResp> pageInfo = new PageInfo<>();
         List<DgPostResp> postRespArrayList = new ArrayList<>();
@@ -72,8 +77,14 @@ public class DgPostService {
             DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/find/info", params, DgPost.class);
             if (call != null) {
                 DgPostResp dgPostResp = BeanUtil.copyProperties(call, DgPostResp.class);
+                DgLikeGetReq likeGetReq = new DgLikeGetReq();
+                likeGetReq.setPostId(dgPost.getId());
+                long likeCount = dgLikeService.all(likeGetReq);
+                dgPostResp.setLikeCount(likeCount);
                 postRespArrayList.add(dgPostResp);
             }
+
+
         }
         pageInfo.setList(postRespArrayList);
         pageInfo.setPageNum(req.getPageNum());

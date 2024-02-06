@@ -34,4 +34,6 @@ public class DgPostResp extends BaseResp {
     private String remark;
 
     private String content;
+
+    private Long likeCount;
 }
