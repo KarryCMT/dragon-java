@@ -1,14 +1,19 @@
 package com.coco.dragon.domain;
 
 import com.coco.dragon.resp.post.DgPostResp;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.util.Date;
 
 public class DgPost extends DgPostResp {
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long userId;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long topicId;
 
     private String title;
@@ -19,10 +24,12 @@ public class DgPost extends DgPostResp {
 
     private Integer status;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
 
     private Date createTime;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long updatorId;
 
     private Date updateTime;

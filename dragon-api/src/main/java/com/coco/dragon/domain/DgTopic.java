@@ -1,8 +1,13 @@
 package com.coco.dragon.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 
 public class DgTopic {
+
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
     private String topicName;
@@ -11,10 +16,12 @@ public class DgTopic {
 
     private String remark;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
 
     private Date createTime;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long updatorId;
 
     private Date updateTime;

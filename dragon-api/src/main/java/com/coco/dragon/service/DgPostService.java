@@ -77,7 +77,7 @@ public class DgPostService {
             //用userId去调用 接口 找到对应的用户名称存入 name
             DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/find/info", params, DgPost.class);
             if (call != null) {
-                DgPostResp dgPostResp = BeanUtil.copyProperties(call, DgPostResp.class);
+                DgPostResp dgPostResp= new DgPostResp();
                 DgLikeGetReq likeGetReq = new DgLikeGetReq();
                 likeGetReq.setPostId(dgPost.getId());
                 long likeCount = dgLikeService.all(likeGetReq);
@@ -87,6 +87,15 @@ public class DgPostService {
                 boolean isLike = dgLikeService.isLike(dgLikeSaveReq);
                 dgPostResp.setLikeCount(likeCount);
                 dgPostResp.setIsLike(isLike);
+                dgPostResp.setId(dgPost.getId());
+                dgPostResp.setContent(dgPost.getContent());
+                dgPostResp.setTitle(dgPost.getTitle());
+                dgPostResp.setPictures(dgPost.getPictures());
+                dgPostResp.setUserId(dgPost.getUserId());
+                dgPostResp.setAvatar(call.getAvatar());
+                dgPostResp.setName(call.getName());
+                dgPostResp.setTopicId(dgPost.getTopicId());
+                dgPostResp.setStatus(dgPost.getStatus());
                 postRespArrayList.add(dgPostResp);
             }
         }
