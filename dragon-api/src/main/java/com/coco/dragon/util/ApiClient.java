@@ -72,6 +72,7 @@ public class ApiClient {
             httpResponse = httpClient.execute(httpPostRequest);
             HttpEntity entity = httpResponse.getEntity();
             response = EntityUtils.toString(entity, "UTF-8");
+            log.info("调用结果 = " + response);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         } finally {

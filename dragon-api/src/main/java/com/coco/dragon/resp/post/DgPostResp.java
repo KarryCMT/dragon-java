@@ -1,12 +1,15 @@
 package com.coco.dragon.resp.post;
 
 import com.coco.dragon.resp.BaseResp;
+import com.coco.dragon.resp.oss.SdFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author liaoshen
@@ -29,7 +32,7 @@ public class DgPostResp extends BaseResp {
 
     private String name;
 
-    private String pictures;
+    private List<SdFile> picturesList;
 
     private String remark;
 

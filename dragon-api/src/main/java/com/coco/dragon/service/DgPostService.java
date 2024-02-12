@@ -14,6 +14,7 @@ import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
+import com.coco.dragon.resp.oss.SdFile;
 import com.coco.dragon.resp.post.DgPostResp;
 import com.coco.dragon.util.ApiClient;
 import com.coco.rabbit.common.exception.RabbitException;
@@ -74,8 +75,10 @@ public class DgPostService {
             Map<String, Object> params = new HashMap<>();
             //获取传来的信息
             params.put("id", dgPost.getUserId());
+            params.put("picturesIds", dgPost.getPictures());
             //用userId去调用 接口 找到对应的用户名称存入 name
             DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/find/info", params, DgPost.class);
+            List<SdFile> file = ApiClient.call("http://127.0.0.1:8004/api/v1/file/list/by/ids", params, SdFile.class);
             if (call != null) {
                 DgPostResp dgPostResp= new DgPostResp();
                 DgLikeGetReq likeGetReq = new DgLikeGetReq();
@@ -90,7 +93,7 @@ public class DgPostService {
                 dgPostResp.setId(dgPost.getId());
                 dgPostResp.setContent(dgPost.getContent());
                 dgPostResp.setTitle(dgPost.getTitle());
-                dgPostResp.setPictures(dgPost.getPictures());
+//                dgPostResp.setPictures(dgPost.getPictures());
                 dgPostResp.setUserId(dgPost.getUserId());
                 dgPostResp.setAvatar(call.getAvatar());
                 dgPostResp.setName(call.getName());
