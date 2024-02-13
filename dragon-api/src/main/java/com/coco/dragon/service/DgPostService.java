@@ -81,7 +81,7 @@ public class DgPostService {
         }
         criteria.andFlagEqualTo(1);
 
-        List<DgPost> list = dgPostMapper.selectByExample(dgPostExample);
+        List<DgPost> list = dgPostMapper.selectByExampleWithBLOBs(dgPostExample);
         PageInfo<DgPostResp> pageInfo = new PageInfo<>();
         List<DgPostResp> postRespArrayList = new ArrayList<>();
         for (DgPost dgPost : list) {

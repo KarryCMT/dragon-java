@@ -22,7 +22,7 @@ public interface UserFeignClient {
      * @param req
      * @return
      */
-    @PostMapping("/system/member/get")
+    @PostMapping("/system/member/find/info")
     SsMember getMember(MemberReq req);
 
     /**
