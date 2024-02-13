@@ -35,6 +35,10 @@ public class DgCommentResp extends BaseResp {
 
     private String content;
 
+    private String name;
+
+    private String avatar;
+
     private Integer isAuthor;
 
 }

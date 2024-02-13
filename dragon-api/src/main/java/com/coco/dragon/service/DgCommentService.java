@@ -3,6 +3,7 @@ package com.coco.dragon.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.coco.dragon.client.UserFeignClient;
 import com.coco.dragon.domain.DgCollect;
 import com.coco.dragon.domain.DgComment;
 import com.coco.dragon.domain.DgCommentExample;
@@ -12,13 +13,16 @@ import com.coco.dragon.mapper.DgCommentMapper;
 import com.coco.dragon.req.comment.DgCommentGetReq;
 import com.coco.dragon.req.comment.DgCommentQueryReq;
 import com.coco.dragon.req.comment.DgCommentSaveReq;
+import com.coco.dragon.req.member.MemberReq;
 import com.coco.dragon.resp.comment.DgCommentResp;
+import com.coco.dragon.resp.user.SsMember;
 import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +37,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Scope("prototype")
 public class DgCommentService {
+
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     @Resource
     private DgCommentMapper dgCommentMapper;
@@ -63,8 +70,14 @@ public class DgCommentService {
         List<DgComment> list = dgCommentMapper.selectByExampleWithBLOBs(dgCommentExample);
         List<DgCommentResp> respList = new ArrayList<>();
         for (DgComment dgComment: list){
-            
+            //  用userId去调用 接口 找到对应的用户名称存入 name
+            MemberReq memberReq = new MemberReq();
+            memberReq.setId(dgComment.getUserId());
+            SsMember member = userFeignClient.getMember(memberReq);
             DgCommentResp resp = BeanUtil.copyProperties(dgComment,DgCommentResp.class);
+            //
+            resp.setName(member.getName());
+            resp.setAvatar(member.getAvatar());
             respList.add(resp);
         }
         PageInfo<DgCommentResp> pageInfo = new PageInfo<>(respList);
@@ -90,6 +103,12 @@ public class DgCommentService {
             respList.add(BeanUtil.copyProperties(rootComment,DgCommentResp.class));
         }
         for (DgCommentResp item:respList){
+            //  用userId去调用 接口 找到对应的用户名称存入 name
+            MemberReq memberReq = new MemberReq();
+            memberReq.setId(item.getUserId());
+            SsMember member = userFeignClient.getMember(memberReq);
+            item.setAvatar(member.getAvatar());
+            item.setName(member.getName());
             item.setChildren(dgComments.stream().filter(comment->comment.getParentId().equals(item.getId())).collect(Collectors.toList()));
         }
         return respList;

@@ -142,7 +142,18 @@ public class DgPostService {
      */
     public DgPostResp get(DgPostGetReq req) {
         DgPost post = dgPostMapper.selectByPrimaryKey(req.getId());
-        return BeanUtil.copyProperties(post, DgPostResp.class);
+        OssReq ossReq = new OssReq();
+        MemberReq memberReq = new MemberReq();
+        memberReq.setId(post.getUserId());
+        ossReq.setPicturesIds(post.getPictures());
+        //用userId去调用 接口 找到对应的用户名称存入 name
+        SsMember member = userFeignClient.getMember(memberReq);
+        List<SdFile> listByIds = ossFeignClient.getFileListByIds(ossReq);
+        DgPostResp dgPostResp = BeanUtil.copyProperties(post, DgPostResp.class);
+        dgPostResp.setName(member.getName());
+        dgPostResp.setAvatar(member.getAvatar());
+        dgPostResp.setPicturesList(listByIds);
+        return dgPostResp;
     }
 
     /**
