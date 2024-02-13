@@ -4,18 +4,23 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.cloud.commons.lang.StringUtils;
+import com.coco.dragon.client.OssFeignClient;
+import com.coco.dragon.client.UserFeignClient;
 import com.coco.dragon.domain.DgPost;
 import com.coco.dragon.domain.DgPostExample;
 import com.coco.dragon.mapper.DgPostMapper;
 import com.coco.dragon.req.draft.DgDraftSaveReq;
 import com.coco.dragon.req.like.DgLikeGetReq;
 import com.coco.dragon.req.like.DgLikeSaveReq;
+import com.coco.dragon.req.member.MemberReq;
+import com.coco.dragon.req.oss.OssReq;
 import com.coco.dragon.req.post.DgPostDraftReq;
 import com.coco.dragon.req.post.DgPostGetReq;
 import com.coco.dragon.req.post.DgPostQueryReq;
 import com.coco.dragon.req.post.DgPostSaveReq;
 import com.coco.dragon.resp.oss.SdFile;
 import com.coco.dragon.resp.post.DgPostResp;
+import com.coco.dragon.resp.user.SsMember;
 import com.coco.dragon.util.ApiClient;
 import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
@@ -23,6 +28,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +44,11 @@ import java.util.Map;
 @Slf4j
 @Scope("prototype")
 public class DgPostService {
+    @Autowired
+    private OssFeignClient ossFeignClient;
+
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     @Resource
     private DgPostMapper dgPostMapper;
@@ -47,6 +58,8 @@ public class DgPostService {
 
     @Resource
     private DgLikeService dgLikeService;
+
+
 
     /**
      * 获取分页
@@ -72,14 +85,14 @@ public class DgPostService {
         PageInfo<DgPostResp> pageInfo = new PageInfo<>();
         List<DgPostResp> postRespArrayList = new ArrayList<>();
         for (DgPost dgPost : list) {
-            Map<String, Object> params = new HashMap<>();
-            //获取传来的信息
-            params.put("id", dgPost.getUserId());
-            params.put("picturesIds", dgPost.getPictures());
+            OssReq ossReq = new OssReq();
+            MemberReq memberReq = new MemberReq();
+            memberReq.setId(dgPost.getUserId());
+            ossReq.setPicturesIds(dgPost.getPictures());
             //用userId去调用 接口 找到对应的用户名称存入 name
-            DgPost call = ApiClient.call("http://127.0.0.1:8001/api/v1/rabbit/system/member/find/info", params, DgPost.class);
-            List<SdFile> file = ApiClient.call("http://127.0.0.1:8004/api/v1/file/list/by/ids", params, SdFile.class);
-            if (call != null) {
+            SsMember member = userFeignClient.getMember(memberReq);
+            List<SdFile> listByIds = ossFeignClient.getFileListByIds(ossReq);
+            if (member != null) {
                 DgPostResp dgPostResp= new DgPostResp();
                 DgLikeGetReq likeGetReq = new DgLikeGetReq();
                 likeGetReq.setPostId(dgPost.getId());
@@ -93,10 +106,10 @@ public class DgPostService {
                 dgPostResp.setId(dgPost.getId());
                 dgPostResp.setContent(dgPost.getContent());
                 dgPostResp.setTitle(dgPost.getTitle());
-//                dgPostResp.setPictures(dgPost.getPictures());
+                dgPostResp.setPicturesList(listByIds);
                 dgPostResp.setUserId(dgPost.getUserId());
-                dgPostResp.setAvatar(call.getAvatar());
-                dgPostResp.setName(call.getName());
+                dgPostResp.setAvatar(member.getAvatar());
+                dgPostResp.setName(member.getName());
                 dgPostResp.setTopicId(dgPost.getTopicId());
                 dgPostResp.setStatus(dgPost.getStatus());
                 postRespArrayList.add(dgPostResp);

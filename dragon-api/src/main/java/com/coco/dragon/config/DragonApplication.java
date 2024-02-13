@@ -18,7 +18,7 @@ import org.springframework.core.env.Environment;
 @ComponentScan("com.coco")
 @MapperScan("com.coco.dragon.mapper")
 @EnableDiscoveryClient
-@EnableFeignClients(clients = UserFeignClient.class)
+@EnableFeignClients(basePackages = ("com.coco.dragon.client"))
 public class DragonApplication {
     private static final Logger LOG = LoggerFactory.getLogger(DragonApplication.class);
 

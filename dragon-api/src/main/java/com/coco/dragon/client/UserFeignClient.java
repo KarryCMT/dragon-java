@@ -1,10 +1,13 @@
 package com.coco.dragon.client;
 
+import com.coco.dragon.req.member.MemberReq;
 import com.coco.dragon.req.user.DgUserGetReq;
+import com.coco.dragon.resp.user.SsMember;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +23,7 @@ public interface UserFeignClient {
      * @return
      */
     @PostMapping("/system/member/get")
-    Map<String,Object> getMember(DgUserGetReq req);
+    SsMember getMember(MemberReq req);
 
     /**
      * 查询所有用户
@@ -28,5 +31,5 @@ public interface UserFeignClient {
      * @return
      */
     @PostMapping("/system/member/all")
-    Map<String,Object> getMemberFindAll();
+    List<SsMember> getMemberFindAll();
 }
