@@ -115,6 +115,34 @@ public class DgCommentService {
 
     }
 
+
+    public List<DgCommentResp> ChildAll(DgCommentGetReq req){
+        DgCommentExample dgCommentExample = new DgCommentExample();
+        DgCommentExample.Criteria criteria = dgCommentExample.createCriteria();
+        criteria.andFlagEqualTo(1);
+        criteria.andParentIdEqualTo(req.getParentId());
+        List<DgComment> dgComments = dgCommentMapper.selectByExampleWithBLOBs(dgCommentExample);
+        List<DgCommentResp> respList = new ArrayList<>();
+        for (DgComment rootComment: dgComments){
+            respList.add(BeanUtil.copyProperties(rootComment,DgCommentResp.class));
+        }
+        for (DgCommentResp item:respList){
+            //  用userId去调用 接口 找到对应的用户名称存入 name
+            MemberReq memberReq = new MemberReq();
+            MemberReq replyMemberReq = new MemberReq();
+            memberReq.setId(item.getUserId());
+            replyMemberReq.setId(item.getAnswerId());
+            SsMember member = userFeignClient.getMember(memberReq);
+            SsMember replyMember = userFeignClient.getMember(replyMemberReq);
+            item.setAvatar(member.getAvatar());
+            item.setName(member.getName());
+            item.setReplyName(replyMember.getName());
+            item.setChildren(dgComments.stream().filter(comment->comment.getParentId().equals(item.getId())).collect(Collectors.toList()));
+        }
+        return respList;
+
+    }
+
     /**
      * 查询单条
      *

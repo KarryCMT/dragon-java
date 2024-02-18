@@ -16,4 +16,6 @@ public class DgCommentGetReq {
 
     private Long userId;
 
+    private Long ParentId;
+
 }

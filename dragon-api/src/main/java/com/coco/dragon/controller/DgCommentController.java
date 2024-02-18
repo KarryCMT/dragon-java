@@ -32,9 +32,25 @@ public class DgCommentController {
         return Result.success(findPage);
     }
 
+    /**
+     * 根据帖子id 查询所有评论
+     * @param req
+     * @return
+     */
     @PostMapping("/find/all")
     public Result all(@RequestBody DgCommentGetReq req) {
         List list = dgCommentService.all(req);
+        return Result.success(list);
+    }
+
+    /**
+     * 根据帖子id的评论 查询所有子评论回复
+     * @param req
+     * @return
+     */
+    @PostMapping("/find/child/all")
+    public Result findChildCommentAll(@RequestBody DgCommentGetReq req) {
+        List list = dgCommentService.ChildAll(req);
         return Result.success(list);
     }
 
