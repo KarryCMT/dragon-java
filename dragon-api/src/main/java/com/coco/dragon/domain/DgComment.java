@@ -1,28 +1,39 @@
 package com.coco.dragon.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 
 public class DgComment {
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
+
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long postId;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long userId;
 
     private Integer contentType;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long parentId;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long answerId;
 
     private Integer isAuthor;
 
     private Integer status;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long creatorId;
 
     private Date createTime;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long updatorId;
 
     private Date updateTime;

@@ -3,6 +3,7 @@ package com.coco.dragon.controller;
 import com.coco.dragon.req.collect.DgCollectGetReq;
 import com.coco.dragon.req.collect.DgCollectQueryReq;
 import com.coco.dragon.req.collect.DgCollectSaveReq;
+import com.coco.dragon.req.follow.DgFollowCancelReq;
 import com.coco.dragon.req.follow.DgFollowGetReq;
 import com.coco.dragon.req.follow.DgFollowQueryReq;
 import com.coco.dragon.req.follow.DgFollowSaveReq;
@@ -56,7 +57,7 @@ public class DgFollowController {
 
 
     @PostMapping("/cancel")
-    public Result cancel(@Valid @RequestBody DgFollowGetReq req) {
+    public Result cancel(@Valid @RequestBody DgFollowCancelReq req) {
         int isDel = dgFollowService.cancel(req);
         return Result.success(isDel);
     }

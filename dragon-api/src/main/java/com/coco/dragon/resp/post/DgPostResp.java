@@ -44,7 +44,27 @@ public class DgPostResp extends BaseResp {
     private Long likeCount = 0L;
 
     /**
+     * 评论数
+     */
+    private Long commentCount = 0L;
+
+    /**
+     * 收藏数
+     */
+    private Long collectCount = 0L;
+
+    /**
      * 是不是当前人点的赞  false-不是  true-是
      */
     private Boolean isLike = false;
+
+    /**
+     * 是不是当前人点的收藏  false-不是  true-是
+     */
+    private Boolean isCollect = false;
+
+    /**
+     * 是不是当前人点的关注发布人  false-不是  true-是
+     */
+    private Boolean isFollow = false;
 }

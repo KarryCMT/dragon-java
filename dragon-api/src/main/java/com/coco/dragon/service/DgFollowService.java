@@ -3,22 +3,35 @@ package com.coco.dragon.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.coco.dragon.client.OssFeignClient;
+import com.coco.dragon.client.UserFeignClient;
 import com.coco.dragon.domain.DgFollow;
 import com.coco.dragon.domain.DgFollowExample;
+import com.coco.dragon.domain.DgLikeExample;
+import com.coco.dragon.domain.DgPost;
 import com.coco.dragon.mapper.DgFollowMapper;
+import com.coco.dragon.req.follow.DgFollowCancelReq;
 import com.coco.dragon.req.follow.DgFollowGetReq;
 import com.coco.dragon.req.follow.DgFollowQueryReq;
 import com.coco.dragon.req.follow.DgFollowSaveReq;
+import com.coco.dragon.req.like.DgLikeSaveReq;
+import com.coco.dragon.req.member.MemberReq;
+import com.coco.dragon.req.oss.OssReq;
 import com.coco.dragon.resp.follow.DgFollowResp;
+import com.coco.dragon.resp.oss.SdFile;
+import com.coco.dragon.resp.post.DgPostResp;
+import com.coco.dragon.resp.user.SsMember;
 import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +41,9 @@ import java.util.List;
 @Slf4j
 @Scope("prototype")
 public class DgFollowService {
+
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     @Resource
     private DgFollowMapper dgFollowMapper;
@@ -54,7 +70,22 @@ public class DgFollowService {
         }
         criteria.andFlagEqualTo(1);
         List<DgFollow> list = dgFollowMapper.selectByExample(dgFollowExample);
-        PageInfo<DgFollow> pageInfo = new PageInfo<>(list);
+        List<DgFollowResp> postRespArrayList = new ArrayList<>();
+        for (DgFollow dgFollow : list) {
+            DgFollowResp dgFollowResp = new DgFollowResp();
+            MemberReq memberReq = new MemberReq();
+            memberReq.setId(dgFollow.getFollowedId());
+            //用userId去调用 接口 找到对应的用户名称存入 name
+            SsMember member = userFeignClient.getMember(memberReq);
+            dgFollowResp.setAvatar(member.getAvatar());
+            dgFollowResp.setName(member.getName());
+            dgFollowResp.setFollowedId(dgFollow.getFollowedId());
+            dgFollowResp.setUserId(dgFollow.getUserId());
+            dgFollowResp.setDesc(member.getRemark());
+            dgFollowResp.setId(dgFollow.getId());
+            postRespArrayList.add(dgFollowResp);
+        }
+        PageInfo<DgFollowResp> pageInfo = new PageInfo<>(postRespArrayList);
         pageInfo.setPageNum(req.getPageNum());
         pageInfo.setPageSize(req.getPageSize());
         return pageInfo;
@@ -97,6 +128,7 @@ public class DgFollowService {
         DgFollowExample.Criteria criteria = dgFollowExample.createCriteria();
         criteria.andFollowedIdEqualTo(req.getFollowedId());
         criteria.andUserIdEqualTo(req.getUserId());
+        criteria.andFlagEqualTo(1);
         List<DgFollow> list= dgFollowMapper.selectByExample(dgFollowExample);
         if (list.size() == 1){
             throw new RabbitException("该用户已关注");
@@ -115,6 +147,24 @@ public class DgFollowService {
         return dgFollowMapper.insert(follow);
     }
 
+    /**
+     * 查询是否关注
+     *
+     * @param req
+     * @return
+     */
+    public boolean isFollow(DgFollowSaveReq req) {
+        DgFollowExample dgFollowExample = new DgFollowExample();
+        DgFollowExample.Criteria criteria = dgFollowExample.createCriteria();
+        criteria.andFollowedIdEqualTo(req.getFollowedId());
+        criteria.andUserIdEqualTo(req.getUserId());
+        criteria.andFlagEqualTo(1);
+        int len = dgFollowMapper.selectByExample(dgFollowExample).size();
+        boolean bool = len == 1;
+        return bool;
+    }
+
+
 
     /**
      * 取消关注
@@ -122,12 +172,16 @@ public class DgFollowService {
      * @param req
      * @return
      */
-    public int cancel(DgFollowGetReq req) {
+    public int cancel(DgFollowCancelReq req) {
         DgFollowExample dgFollowExample = new DgFollowExample();
         DgFollowExample.Criteria criteria = dgFollowExample.createCriteria();
-        criteria.andIdEqualTo(req.getId());
+        criteria.andFollowedIdEqualTo(req.getFollowedId());
         criteria.andUserIdEqualTo(req.getUserId());
-        DgFollow collect = dgFollowMapper.selectByPrimaryKey(req.getId());
+        criteria.andFlagEqualTo(1);
+        DgFollow collect = dgFollowMapper.selectByExample(dgFollowExample).get(0);
+        if (collect == null){
+            throw new RabbitException("没有查询到关注用户");
+        }
         collect.setFlag(0);
         return dgFollowMapper.updateByExampleSelective(collect, dgFollowExample);
     }

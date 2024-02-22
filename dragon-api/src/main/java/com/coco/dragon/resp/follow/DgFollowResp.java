@@ -23,4 +23,10 @@ public class DgFollowResp extends BaseResp {
     @JsonSerialize(using= ToStringSerializer.class)
     private Long userId;
 
+    private String name;
+
+    private String avatar;
+
+    private String desc;
+
 }

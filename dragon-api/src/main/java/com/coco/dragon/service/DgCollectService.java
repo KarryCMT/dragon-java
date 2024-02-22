@@ -5,10 +5,12 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.coco.dragon.domain.DgCollect;
 import com.coco.dragon.domain.DgCollectExample;
+import com.coco.dragon.domain.DgLikeExample;
 import com.coco.dragon.mapper.DgCollectMapper;
 import com.coco.dragon.req.collect.DgCollectGetReq;
 import com.coco.dragon.req.collect.DgCollectQueryReq;
 import com.coco.dragon.req.collect.DgCollectSaveReq;
+import com.coco.dragon.req.like.DgLikeSaveReq;
 import com.coco.dragon.resp.collect.DgCollectResp;
 import com.coco.rabbit.common.exception.RabbitException;
 import com.coco.rabbit.common.util.SnowUtil;
@@ -108,6 +110,23 @@ public class DgCollectService {
         collect.setFlag(1);
         collect.setStatus(1);
         return dgCollectMapper.insert(collect);
+    }
+
+    /**
+     * 查询是否收藏
+     *
+     * @param req
+     * @return
+     */
+    public boolean isCollect(DgCollectSaveReq req) {
+        DgCollectExample dgCollectExample = new DgCollectExample();
+        DgCollectExample.Criteria criteria = dgCollectExample.createCriteria();
+        criteria.andPostIdEqualTo(req.getPostId());
+        criteria.andUserIdEqualTo(req.getUserId());
+        criteria.andFlagEqualTo(1);
+        int len = dgCollectMapper.selectByExample(dgCollectExample).size();
+        boolean bool = len == 1;
+        return bool;
     }
 
 
