@@ -128,6 +128,7 @@ public class DgPostService {
                 dgPostResp.setName(member.getName());
                 dgPostResp.setTopicId(dgPost.getTopicId());
                 dgPostResp.setStatus(dgPost.getStatus());
+                dgPostResp.setCreateTime(dgPost.getCreateTime());
                 postRespArrayList.add(dgPostResp);
             }
         }
