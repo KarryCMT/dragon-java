@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.coco.dragon.mapper.DgCommentMapper">
-  <resultMap id="BaseResultMap" type="com.coco.dragon.domain.DgComment">
+<mapper namespace="com.dragon.mapper.DgCommentMapper">
+  <resultMap id="BaseResultMap" type="com.dragon.domain.DgComment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -16,7 +16,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.coco.dragon.domain.DgComment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.dragon.domain.DgComment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -84,7 +84,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.coco.dragon.domain.DgCommentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.dragon.domain.DgCommentExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -100,7 +100,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.coco.dragon.domain.DgCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.dragon.domain.DgCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -126,13 +126,13 @@
     delete from dg_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.coco.dragon.domain.DgCommentExample">
+  <delete id="deleteByExample" parameterType="com.dragon.domain.DgCommentExample">
     delete from dg_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.coco.dragon.domain.DgComment">
+  <insert id="insert" parameterType="com.dragon.domain.DgComment">
     insert into dg_comment (id, post_id, user_id, 
       content_type, parent_id, answer_id, 
       is_author, `status`, creator_id, 
@@ -144,7 +144,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updatorId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{flag,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.coco.dragon.domain.DgComment">
+  <insert id="insertSelective" parameterType="com.dragon.domain.DgComment">
     insert into dg_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -235,7 +235,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.coco.dragon.domain.DgCommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.dragon.domain.DgCommentExample" resultType="java.lang.Long">
     select count(*) from dg_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -330,7 +330,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.coco.dragon.domain.DgComment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.dragon.domain.DgComment">
     update dg_comment
     <set>
       <if test="postId != null">
@@ -375,7 +375,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.coco.dragon.domain.DgComment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dragon.domain.DgComment">
     update dg_comment
     set post_id = #{postId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
@@ -392,7 +392,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.coco.dragon.domain.DgComment">
+  <update id="updateByPrimaryKey" parameterType="com.dragon.domain.DgComment">
     update dg_comment
     set post_id = #{postId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},

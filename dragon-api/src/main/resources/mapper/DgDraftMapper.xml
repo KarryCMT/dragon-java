@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.coco.dragon.mapper.DgDraftMapper">
-  <resultMap id="BaseResultMap" type="com.coco.dragon.domain.DgDraft">
+<mapper namespace="com.dragon.mapper.DgDraftMapper">
+  <resultMap id="BaseResultMap" type="com.dragon.domain.DgDraft">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -74,7 +74,7 @@
     id, post_id, user_id, `status`, creator_id, create_time, updator_id, update_time, 
     flag
   </sql>
-  <select id="selectByExample" parameterType="com.coco.dragon.domain.DgDraftExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.dragon.domain.DgDraftExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
     delete from dg_draft
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.coco.dragon.domain.DgDraftExample">
+  <delete id="deleteByExample" parameterType="com.dragon.domain.DgDraftExample">
     delete from dg_draft
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.coco.dragon.domain.DgDraft">
+  <insert id="insert" parameterType="com.dragon.domain.DgDraft">
     insert into dg_draft (id, post_id, user_id, 
       `status`, creator_id, create_time, 
       updator_id, update_time, flag
@@ -114,7 +114,7 @@
       #{updatorId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.coco.dragon.domain.DgDraft">
+  <insert id="insertSelective" parameterType="com.dragon.domain.DgDraft">
     insert into dg_draft
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -175,7 +175,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.coco.dragon.domain.DgDraftExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.dragon.domain.DgDraftExample" resultType="java.lang.Long">
     select count(*) from dg_draft
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -231,7 +231,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.coco.dragon.domain.DgDraft">
+  <update id="updateByPrimaryKeySelective" parameterType="com.dragon.domain.DgDraft">
     update dg_draft
     <set>
       <if test="postId != null">
@@ -261,7 +261,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.coco.dragon.domain.DgDraft">
+  <update id="updateByPrimaryKey" parameterType="com.dragon.domain.DgDraft">
     update dg_draft
     set post_id = #{postId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},

@@ -7,17 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="generator" />
         <module name="dragon-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dragon-generator" target="17" />
+      <module name="generator" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="dragon-api" options="-parameters" />
+      <module name="dragon" options="-parameters -parameters" />
+      <module name="dragon-api" options="-parameters -parameters" />
       <module name="dragon-generator" options="-parameters" />
       <module name="generator" options="-parameters" />
     </option>
