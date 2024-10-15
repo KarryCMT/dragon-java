@@ -1,7 +1,6 @@
 package com.dragon.req.user;
 
 import com.dragon.req.PageReq;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**

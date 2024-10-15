@@ -56,6 +56,7 @@ public class DgCollectServiceImpl extends ServiceImpl<DgCollectMapper, DgCollect
      *
      * @return
      */
+    @Override
     public List<DgCollect> all() {
         DgCollectExample dgCollectExample = new DgCollectExample();
         DgCollectExample.Criteria criteria = dgCollectExample.createCriteria();
@@ -70,6 +71,7 @@ public class DgCollectServiceImpl extends ServiceImpl<DgCollectMapper, DgCollect
      * @param req
      * @return
      */
+    @Override
     public DgCollectVo get(DgCollectGetReq req) {
         DgCollect collect = baseMapper.selectByPrimaryKey(req.getId());
         DgCollectVo resp = BeanUtil.copyProperties(collect, DgCollectVo.class);
@@ -82,6 +84,7 @@ public class DgCollectServiceImpl extends ServiceImpl<DgCollectMapper, DgCollect
      * @param req
      * @return
      */
+    @Override
     public int create(DgCollectSaveReq req) {
         DateTime now = DateTime.now();
         DgCollectExample dgCollectExample = new DgCollectExample();
@@ -108,6 +111,7 @@ public class DgCollectServiceImpl extends ServiceImpl<DgCollectMapper, DgCollect
      * @param req
      * @return
      */
+    @Override
     public boolean isCollect(DgCollectSaveReq req) {
         DgCollectExample dgCollectExample = new DgCollectExample();
         DgCollectExample.Criteria criteria = dgCollectExample.createCriteria();
@@ -126,6 +130,7 @@ public class DgCollectServiceImpl extends ServiceImpl<DgCollectMapper, DgCollect
      * @param req
      * @return
      */
+    @Override
     public int cancel(DgCollectGetReq req) {
         DgCollectExample dgCollectExample = new DgCollectExample();
         DgCollectExample.Criteria criteria = dgCollectExample.createCriteria();

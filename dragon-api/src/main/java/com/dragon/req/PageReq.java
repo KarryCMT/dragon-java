@@ -1,22 +1,27 @@
 package com.dragon.req;
 
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author liaoshen
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PageReq {
 
-    @NotNull(message = "当前分页不能为空")
+    @NotNull("当前分页不能为空")
     private Integer pageNum;
 
-    @NotNull(message = "分页数量不能为空")
+    @NotNull("分页数量不能为空")
     private Integer pageSize;
 
     private Integer status;
 
     private Integer flag;
+
 
 }

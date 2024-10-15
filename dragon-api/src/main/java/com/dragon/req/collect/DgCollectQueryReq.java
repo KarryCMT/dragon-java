@@ -1,8 +1,8 @@
 package com.dragon.req.collect;
 
 import com.dragon.req.PageReq;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author liaoshen
@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class DgCollectQueryReq extends PageReq {
 
-    @NotNull(message = "用户ID不能为空")
+    @NotNull("用户ID不能为空")
     private Long userId;
 
     private Integer status;

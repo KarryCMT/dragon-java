@@ -3,6 +3,7 @@ package com.dragon.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dragon.domain.DgDraft;
 import com.dragon.domain.DgDraftExample;
 import com.dragon.mapper.DgDraftMapper;
@@ -21,13 +22,8 @@ import java.util.List;
 /**
  * @author liaoshen
  */
-@Service
-@Slf4j
-@Scope("prototype")
-public class DgDraftService {
+public interface DgDraftService extends IService<DgDraft> {
 
-    @Autowired
-    private DgDraftMapper DgDraftMapper;
 
     /**
      * 获取分页
@@ -35,38 +31,14 @@ public class DgDraftService {
      * @param req
      * @return
      */
-    public Page page(DgDraftQueryReq req) {
-        DgDraftExample dgDraftExample = new DgDraftExample();
-        DgDraftExample.Criteria criteria = dgDraftExample.createCriteria();
-        PageHelper.startPage(req.getPageNum(), req.getPageSize());
-        //  查询 用户ID
-        if (ObjectUtil.isNotNull(req.getUserId())) {
-            criteria.andUserIdEqualTo(req.getUserId());
-        }
-        //  查询状态
-        if (ObjectUtil.isNotNull(req.getStatus())) {
-            criteria.andStatusEqualTo(req.getStatus());
-        }
-        criteria.andFlagEqualTo(1);
-        List<DgDraft> list = DgDraftMapper.selectByExample(dgDraftExample);
-        PageInfo<DgDraft> pageInfo = new PageInfo<>(list);
-        pageInfo.setPageNum(req.getPageNum());
-        pageInfo.setPageSize(req.getPageSize());
-        return pageInfo;
-    }
+    public Page page(DgDraftQueryReq req);
 
     /**
      * 获取所有
      *
      * @return
      */
-    public List<DgDraft> all() {
-        DgDraftExample dgDraftExample = new DgDraftExample();
-        DgDraftExample.Criteria criteria = dgDraftExample.createCriteria();
-        criteria.andFlagEqualTo(1);
-        return DgDraftMapper.selectByExample(dgDraftExample);
-
-    }
+    public List<DgDraft> all();
 
     /**
      * 查询单条
@@ -74,11 +46,7 @@ public class DgDraftService {
      * @param req
      * @return
      */
-    public DgDraftResp get(DgDraftGetReq req) {
-        DgDraft draft = DgDraftMapper.selectByPrimaryKey(req.getId());
-        DgDraftResp resp = BeanUtil.copyProperties(draft, DgDraftResp.class);
-        return resp;
-    }
+    public DgDraftResp get(DgDraftGetReq req);
 
     /**
      * 新增草稿
@@ -86,10 +54,7 @@ public class DgDraftService {
      * @param req
      * @return
      */
-    public int create(DgDraftSaveReq req) {
-        DgDraft draft = BeanUtil.copyProperties(req, DgDraft.class);
-        return DgDraftMapper.insert(draft);
-    }
+    public int create(DgDraftSaveReq req);
 
 
     /**
@@ -98,13 +63,5 @@ public class DgDraftService {
      * @param req
      * @return
      */
-    public int delete(DgDraftGetReq req) {
-        DgDraftExample dgDraftExample = new DgDraftExample();
-        DgDraftExample.Criteria criteria = dgDraftExample.createCriteria();
-        criteria.andIdEqualTo(req.getId());
-        criteria.andUserIdEqualTo(req.getUserId());
-        DgDraft draft = DgDraftMapper.selectByPrimaryKey(req.getId());
-        draft.setFlag(0);
-        return DgDraftMapper.updateByExampleSelective(draft, dgDraftExample);
-    }
+    public int delete(DgDraftGetReq req);
 }

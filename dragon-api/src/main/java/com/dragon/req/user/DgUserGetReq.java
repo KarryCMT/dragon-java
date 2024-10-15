@@ -1,8 +1,7 @@
 package com.dragon.req.user;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
@@ -12,7 +11,7 @@ import java.util.Date;
 @Data
 public class DgUserGetReq {
 
-    @NotNull(message = "【ID】不能为空")
+    @NotNull(  "【ID】不能为空")
     private Integer id;
 
 }

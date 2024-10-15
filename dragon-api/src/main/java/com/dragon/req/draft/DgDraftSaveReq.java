@@ -1,8 +1,8 @@
 package com.dragon.req.draft;
 
 import com.dragon.req.BaseReq;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author liaoshen
@@ -12,10 +12,13 @@ public class DgDraftSaveReq extends BaseReq {
 
     private Long id;
 
-    @NotNull(message = "用户ID不能为空")
+    @NotNull(  "用户ID不能为空")
     private Long userId;
 
-    @NotNull(message = "帖子ID不能为空")
+    @NotNull(  "帖子ID不能为空")
     private Long postId;
 
+    public DgDraftSaveReq() {
+
+    }
 }

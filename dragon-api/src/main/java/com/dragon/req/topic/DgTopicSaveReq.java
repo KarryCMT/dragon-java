@@ -1,8 +1,9 @@
 package com.dragon.req.topic;
 
 import com.dragon.req.BaseReq;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author liaoshen

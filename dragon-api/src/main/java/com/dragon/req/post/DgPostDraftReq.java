@@ -1,7 +1,6 @@
 package com.dragon.req.post;
 
 import com.dragon.req.BaseReq;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**

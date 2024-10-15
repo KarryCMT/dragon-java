@@ -4,6 +4,7 @@ import com.dragon.req.like.DgLikeSaveReq;
 import com.dragon.service.DgLikeService;
 import com.monkey.common.bean.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author liaoshen
  */
+@Controller
 @RestController
 @RequestMapping("/like")
 public class DgLikeController {

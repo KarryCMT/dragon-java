@@ -9,6 +9,7 @@ import com.dragon.vo.post.DgPostResp;
 import com.dragon.service.DgPostService;
 import com.monkey.common.bean.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * @author liaoshen
  */
+@Controller
 @RestController
 @RequestMapping("/post")
 public class DgPostController {

@@ -12,7 +12,7 @@ import java.util.List;
  * @author liaoshen
  */
 @Component
-@FeignClient(name = "oss-service",path = "",url = "http://localhost:8004/api/v1/oss")
+@FeignClient(name = "rabbit-oss",path = "",url = "http://localhost:8002/api/v1/oss")
 public interface OssFeignClient {
 
     /**

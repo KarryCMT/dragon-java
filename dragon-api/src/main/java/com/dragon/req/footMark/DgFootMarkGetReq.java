@@ -1,7 +1,7 @@
 package com.dragon.req.footMark;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author liaoshen
@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class DgFootMarkGetReq {
 
-    @NotNull(message = "用户ID不能为空")
+    @NotNull(  "用户ID不能为空")
     private Long userId;
 
-    @NotNull(message = "ID不能为空")
+    @NotNull(  "ID不能为空")
     private Long id;
 
 }

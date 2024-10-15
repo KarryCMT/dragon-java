@@ -1,6 +1,5 @@
 package com.dragon.req.like;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**

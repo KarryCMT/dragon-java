@@ -1,5 +1,6 @@
 package com.dragon.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dragon.req.comment.DgCommentGetReq;
 import com.dragon.req.comment.DgCommentQueryReq;
@@ -8,6 +9,7 @@ import com.dragon.vo.comment.DgCommentResp;
 import com.dragon.service.DgCommentService;
 import com.monkey.common.bean.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,7 @@ import java.util.List;
 /**
  * @author liaoshen
  */
+@Controller
 @RestController
 @RequestMapping("/comment")
 public class DgCommentController {
@@ -27,8 +30,9 @@ public class DgCommentController {
 
     @PostMapping("/find/page")
     public ResponseBean page(@Validated @RequestBody DgCommentQueryReq req) {
-        Page findPage = dgCommentService.page(req);
-        return ResponseBean.success(findPage);
+        Page page = dgCommentService.page(req);
+        List<DgCommentResp> data = BeanUtil.copyToList(page.getRecords() , DgCommentResp.class);
+        return ResponseBean.success(data,page);
     }
 
     /**
