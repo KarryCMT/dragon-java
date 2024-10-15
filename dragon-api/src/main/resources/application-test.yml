@@ -1,0 +1,76 @@
+#测试环境配置项
+server:
+  port: ${SERVER_PORT:10001}
+spring:
+  #  文件传输限制
+  servlet:
+    multipart:
+      # 设置上传文件的大小
+      max-file-size: 100MB
+      # 设置整个请求的大小
+      max-request-size: 100MB
+  # redis配置
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接超时时间
+    timeout: 10s
+  cloud:
+    #注册中心地址
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        ip: ${NACOS_DISCOVERY_IP:}
+        metadata:
+          platform: gp3.0
+  # JDBC 配置(驱动类自动从url的mysql识别,数据源类型自动识别)
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dragon-test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL&nullCatalogMeansCurrent=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    hikari:
+      #HikariCP将尝试通过仅基于jdbcUrl的DriverManager解析驱动程序
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #池中维护的最小空闲连接数
+      minimum-idle: 5
+      #连接允许在池中闲置的最长时间
+      idle-timeout: 30000
+      #池中最大连接数，包括闲置和使用中的连接
+      maximum-pool-size: 10
+      #自动提交从池中返回的连接
+      auto-commit: true
+      #自定义名称
+      pool-name: MyHikariCP
+      #池中连接最长生命周期
+      max-lifetime: 120000
+      #等待来自池的连接的最大毫秒数
+      connection-timeout: 30000
+      #如果您的驱动程序支持JDBC4，我们强烈建议您不要设置此属性
+      connection-test-query: SELECT 1
+#正式环境应该将此配置设置为false,关闭swagger功能
+rabbit:
+  swagger:
+    enabled: true
+  audit:
+    log:
+      enabled: true
+      enabledParams: false
+      enabledResult: false
+      tableName: rabbit_audit_log
+      initEveryStartup: false
+  excel:
+    readBatchSize: 5000
+feign:
+  hystrix:
+    enabled: false
+  service:
+    rabbit:
+      cds:
+        name: rabbit-public-cds

@@ -1,0 +1,77 @@
+#server.port = 10001
+#server.servlet.context-path = /api/v1/dragon
+#
+#mybatis.mapper-locations=classpath:/mapper/**/*.xml
+#logging.level.com.coco.dragon.mapper=trace
+#
+#spring.rabbitmq.host=127.0.0.1
+#spring.rabbitmq.port=5672
+#spring.rabbitmq.virtual-host=dragon-dev
+#spring.rabbitmq.username=dragon
+#spring.rabbitmq.password=dragon
+#
+#feign.httpclient.enabled=true
+
+
+#???????????????
+server:
+  servlet:
+    context-path: /api/v1/dragon
+spring:
+  application:
+    #??ID
+    name: dragon-service
+  profiles:
+    #???????
+    active: ${spring_profiles_active:dev}
+  #?????
+  messages:
+    basename: i18n.message
+    cache-duration: 3600
+    encoding: UTF-8
+
+#mybatis-plus??
+mybatis-plus:
+  #??Mapper????
+  mapper-locations: classpath*:mapper/*.xml,com/dragon/**/mapper/xml/*.xml,com/dragon/mapper/xml/*.xml
+  #  typeAliasesPackage: com.dragon.generator.entity
+  global-config:
+    banner: false
+    #???????mybatis-plus? ?? ??????? ?? ???????????
+    db-config:
+      id-type: AUTO
+      #??????
+      logic-delete-field: flag
+      #???
+      logic-delete-value: 0
+      #????
+      logic-not-delete-value: 1
+  configuration:
+    #???????
+    map-underscore-to-camel-case: true
+    #??????
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+
+feign:
+  client:
+    config:
+      default:
+        #???????3?
+        connectTimeout: 3000
+        #???????10?
+        readTimeout: 10000
+
+# jar?????
+dragon:
+  jwtKey: rabbit-platform
+  dependencies:
+    load:
+      enable: false
+
