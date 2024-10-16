@@ -2,32 +2,24 @@ package com.dragon.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dragon.client.UserFeignClient;
-import com.dragon.domain.DgDraft;
 import com.dragon.domain.DgFollow;
 import com.dragon.domain.DgFollowExample;
-import com.dragon.mapper.DgDraftMapper;
 import com.dragon.mapper.DgFollowMapper;
 import com.dragon.req.follow.DgFollowCancelReq;
 import com.dragon.req.follow.DgFollowGetReq;
 import com.dragon.req.follow.DgFollowQueryReq;
 import com.dragon.req.follow.DgFollowSaveReq;
-import com.dragon.req.member.MemberReq;
-import com.dragon.service.DgDraftService;
 import com.dragon.service.DgFollowService;
 import com.dragon.vo.follow.DgFollowResp;
-import com.dragon.vo.user.SsMember;
-import com.monkey.common.bean.PageInfo;
 import com.monkey.common.exception.BaseRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,7 +64,7 @@ public class DgFollowServiceImpl extends ServiceImpl<DgFollowMapper, DgFollow> i
 //            MemberReq memberReq = new MemberReq();
 //            memberReq.setId(dgFollow.getFollowedId());
 //            //用userId去调用 接口 找到对应的用户名称存入 name
-//            SsMember member = userFeignClient.getMember(memberReq);
+//            RbMember member = userFeignClient.getMember(memberReq);
 //            dgFollowResp.setAvatar(member.getAvatar());
 //            dgFollowResp.setName(member.getName());
 //            dgFollowResp.setFollowedId(dgFollow.getFollowedId());

@@ -60,13 +60,8 @@ mybatis-plus:
     boolValue: TRUE
 
 feign:
-  client:
-    config:
-      default:
-        #???????3?
-        connectTimeout: 3000
-        #???????10?
-        readTimeout: 10000
+  httpclient:
+    enabled: true
 
 # jar?????
 dragon:

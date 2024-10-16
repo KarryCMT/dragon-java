@@ -1,8 +1,10 @@
 package com.dragon.vo.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,22 +14,27 @@ import java.util.Date;
  * @author 
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-public class SsMember implements Serializable {
+public class RbMember implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 成员的ID
      */
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
      * 成员的部门ID
      */
-    private String deptId;
+    private Long deptId;
 
     /**
      * 成员的岗位ID
      */
-    private String jobId;
+    private Long jobId;
 
     /**
      * 成员姓名
@@ -53,16 +60,6 @@ public class SsMember implements Serializable {
      * 密码
      */
     private String password;
-
-    /**
-     * snt前端加密的密码
-     */
-    private String sntPassword;
-
-    /**
-     * 手势密码
-     */
-    private String gesturePassword;
 
     /**
      * 成员的昵称
@@ -92,7 +89,7 @@ public class SsMember implements Serializable {
     /**
      * 用户性别：0-未知，1-男，2-女
      */
-    private Integer gender;
+    private Byte gender;
 
     /**
      * 头像(地址)
@@ -105,11 +102,6 @@ public class SsMember implements Serializable {
     private Integer status;
 
     /**
-     * 用户在钉钉中的id
-     */
-    private String dingdingUserId;
-
-    /**
      * 备注
      */
     private String remark;
@@ -117,13 +109,11 @@ public class SsMember implements Serializable {
     /**
      * 锁定时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
     private Date lockTime;
 
     /**
      * 锁定到期时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
     private Date lockExpireTime;
 
     /**
@@ -134,39 +124,31 @@ public class SsMember implements Serializable {
     /**
      * 字段创建者ID
      */
+    @TableField(value = "creator_id",fill = FieldFill.INSERT)
     private Long creatorId;
 
     /**
      * 字段创建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 字段更新者ID
      */
+    @TableField(value = "updator_id",fill = FieldFill.UPDATE)
     private Long updatorId;
 
     /**
      * 字段更新时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" ,timezone = "GMT+8")
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**
      * 标志：0-已删除，1-未删除
      */
+    @TableLogic
+    @TableField(value = "flag")
     private Integer flag;
-
-    /**
-     * ad域账户名称
-     */
-    private String adUserName;
-
-    /**
-     * ad域登录名称
-     */
-    private String adLoginName;
-
-    private static final long serialVersionUID = 1L;
 }
